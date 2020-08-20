@@ -19,26 +19,16 @@
             <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" [activeIds]="extraParameter">
               <ngb-panel>
                 <ng-template ngbPanelHeader>
-                  <div class="vsm-header">Main Navigation</div>
+                  <div class="vsm-header">Trang chủ ADMIN</div>
                 </ng-template>
               </ngb-panel>
               <ngb-panel id="dashboardsMenu">
                 <ng-template ngbPanelHeader>
-                  <button ngbPanelToggle class="vsm-link">
+                  <button ngbPanelToggle class="vsm-link" routerLinkActive="active-item"
+                          [routerLinkActiveOptions]="{exact: true}">
                     <i class="vsm-icon pe-7s-rocket"></i>
-                    <span class="vsm-title">Dashboards</span>
-                    <i class="vsm-arrow"></i>
+                    <a routerLink="" class="vsm-link pl-0"><span class="vsm-title">Số liệu thống kê</span></a>
                   </button>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                  <div class="vsm-dropdown">
-                    <div class="vsm-list">
-                      <div class="vsm-item"><a routerLink="" routerLinkActive="active-item"
-                                               [routerLinkActiveOptions]="{exact: true}" class="vsm-link"><span
-                        class="vsm-title">Analytics</span></a>
-                      </div>
-                    </div>
-                  </div>
                 </ng-template>
               </ngb-panel>
               <ngb-panel id="pagesMenu">
@@ -70,12 +60,18 @@
               </ngb-panel>
               <ngb-panel>
                 <ng-template ngbPanelHeader>
-                  <div class="vsm-header">Bootstrap Components</div>
+                  <div class="vsm-header">DANH SÁCH USER</div>
                 </ng-template>
               </ngb-panel>
               <ngb-panel id="elementsMenu">
                 <ng-template ngbPanelHeader>
-                  <button ngbPanelToggle class="vsm-link">
+                  <button ngbPanelToggle class="vsm-link" routerLinkActive="active-item" routerLink="/elements/buttons-standard">
+                    <i class="vsm-icon pe-7s-diamond"></i>
+                    <span class="vsm-title">Danh sách user</span>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelsToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-diamond"></i>
                     <span class="vsm-title">Elements</span>
                     <i class="vsm-arrow"></i>
@@ -85,7 +81,7 @@
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
                       <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/elements/buttons-standard"
+                        <a
                            class="vsm-link"> <span
                           class="vsm-title">Standard Buttons</span></a>
                       </div>
@@ -192,7 +188,7 @@
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
                       <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/tables/bootstrap" class="vsm-link"> <span
+                        <a routerLinkActive="active-item" routerLink="/tables/bootstrap" class="vsm-link"><span
                           class="vsm-title">Bootstrap 4 Tables</span></a>
                       </div>
                     </div>
@@ -201,26 +197,15 @@
               </ngb-panel>
               <ngb-panel>
                 <ng-template ngbPanelHeader>
-                  <div class="vsm-header">Dashboard Boxes</div>
+                  <div class="vsm-header">DANH SÁCH BỆNH NHÂN</div>
                 </ng-template>
               </ngb-panel>
               <ngb-panel id="pagesMenu3">
                 <ng-template ngbPanelHeader>
-                  <button ngbPanelToggle class="vsm-link">
-                    <i class="vsm-icon pe-7s-graph2"></i>
-                    <span class="vsm-title">Chart Boxes</span>
-                    <i class="vsm-arrow"></i>
+                  <button ngbPanelToggle class="vsm-link" routerLinkActive="active-item" routerLink="/widgets/chart-boxes-3">
+                    <i class="vsm-icon pe-7s-diamond"></i>
+                    <span class="vsm-title">Bệnh nhân</span>
                   </button>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                  <div class="vsm-dropdown">
-                    <div class="vsm-list">
-                      <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/widgets/chart-boxes-3" class="vsm-link">
-                          <span class="vsm-title">Variation 3</span></a>
-                      </div>
-                    </div>
-                  </div>
                 </ng-template>
               </ngb-panel>
             </ngb-accordion>
