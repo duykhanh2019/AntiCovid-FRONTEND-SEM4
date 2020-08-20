@@ -64,7 +64,7 @@ const routes: Routes = [
 
       // Elements
 
-      {path: 'elements/buttons-standard', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
+      {path: 'admin/list-user', component: StandardComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'elements/dropdowns', component: DropdownsComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'elements/icons', component: IconsComponent, data: {extraParameter: 'elementsMenu'}},
       {path: 'elements/cards', component: CardsComponent, data: {extraParameter: 'elementsMenu'}},
