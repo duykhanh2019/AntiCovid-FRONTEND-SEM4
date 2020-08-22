@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 @Component({
   selector: 'app-standard',
   templateUrl: './standard.component.html',
-  styles: []
+  styleUrls: ['./standard.component.css']
 })
 export class StandardComponent implements OnInit {
 
@@ -12,6 +12,7 @@ export class StandardComponent implements OnInit {
   icon = 'pe-7s-plane icon-gradient bg-tempting-azure';
 
   progress: boolean | number = false;
+  page = 4;
 
   model = {
     left: true,
