@@ -108,7 +108,7 @@ const routes: Routes = [
 
       // User Pages
 
-      {path: 'pages/login-boxed', component: LoginBoxedComponent, data: {extraParameter: ''}},
+      {path: 'pages/login', component: LoginBoxedComponent, data: {extraParameter: ''}},
       {path: 'pages/register-boxed', component: RegisterBoxedComponent, data: {extraParameter: ''}},
       {path: 'pages/forgot-password-boxed', component: ForgotPasswordBoxedComponent, data: {extraParameter: ''}},
     ]
