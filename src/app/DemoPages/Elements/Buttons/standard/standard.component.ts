@@ -6,9 +6,10 @@ import {StandardService} from './standard.service';
 @Component({
   selector: 'app-standard',
   templateUrl: './standard.component.html',
-  styles: []
+  styleUrls: ['./standard.component.css']
 })
 export class StandardComponent implements OnInit {
+  page = 4;
   datas: User[] = [];
   constructor(private standardService: StandardService) { }
   ngOnInit(): void {
