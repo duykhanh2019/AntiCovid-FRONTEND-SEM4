@@ -7,9 +7,10 @@
 }
 
 .app-logo-inverse {
-  height: $logo-height;
-  width: $logo-width;
-  background: url('./assets/images/logo.png');
+  height: $logo-height-1;
+  width: $logo-width-1;
+  background: url('./assets/images/logo1.png') no-repeat;
+  background-size: 130px;
 }
 
 .app-login-box {
