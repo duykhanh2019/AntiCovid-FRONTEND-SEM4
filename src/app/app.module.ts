@@ -12,6 +12,7 @@ import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 // BOOTSTRAP COMPONENTS
 
@@ -214,6 +215,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     // Charts
 
     ChartsModule,
+    NgxPaginationModule,
   ],
   providers: [
     {
@@ -228,6 +230,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   bootstrap: [AppComponent]
 })
+
 
 export class AppModule {
   constructor(private ngRedux: NgRedux<ArchitectUIState>,
