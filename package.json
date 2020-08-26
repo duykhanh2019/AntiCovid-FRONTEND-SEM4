@@ -35,6 +35,7 @@
     "lodash-es": "^4.17.11",
     "ng-bootstrap": "^1.6.3",
     "ng2-charts": "^2.2.2",
+    "ngx-pagination": "^5.0.0",
     "ngx-perfect-scrollbar": "^7.2.1",
     "node-sass": "^4.14.1",
     "pe7-icon": "^1.0.4",

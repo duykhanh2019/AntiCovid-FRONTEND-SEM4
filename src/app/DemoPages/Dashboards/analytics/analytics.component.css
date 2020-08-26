@@ -1,0 +1,13 @@
+.btn-vietnam {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-foreign {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
