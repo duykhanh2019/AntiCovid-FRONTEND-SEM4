@@ -14,6 +14,9 @@ $widget-spacer: $spacer;
   text-align: center;
   padding: $widget-spacer;
   position: relative;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
 
   .progress-sub-label {
     opacity: .8;
@@ -55,10 +58,10 @@ $widget-spacer: $spacer;
 
   .widget-numbers {
     font-weight: bold;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     display: block;
     line-height: 1;
-    margin: $widget-spacer auto;
+    text-align: center;
 
     & + .widget-chart-flex,
     & + .widget-description,
@@ -71,12 +74,86 @@ $widget-spacer: $spacer;
     margin: -0.5rem 0 0;
     display: block;
     opacity: .6;
+    font-size: 16px;
+    color: red;
+    font-weight: 700;
+    text-align: center;
 
     &:first-child {
       margin-top: 0;
     }
 
     & + .widget-numbers {
+      margin-top: ($widget-spacer / 2);
+    }
+  }
+  .widget-infection {
+    margin: -0.5rem 0 0;
+    display: block;
+    opacity: 6;
+    font-size: 16px;
+    color: #666666;
+    font-weight: 700;
+    text-align: center;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    & + .widget-numbers {
+      color: #666666;
+      margin-top: ($widget-spacer / 2);
+    }
+  }
+  .widget-treatment {
+    margin: -0.5rem 0 0;
+    display: block;
+    font-size: 16px;
+    color: #ff9c00;
+    font-weight: 700;
+    text-align: center;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    & + .widget-numbers {
+      margin-top: ($widget-spacer / 2);
+      color: #ff9c00;
+
+    }
+  }
+  .widget-cured {
+    margin: -0.5rem 0 0;
+    display: block;
+    font-size: 16px;
+    color: #357bb8;
+    font-weight: 700;
+    text-align: center;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    & + .widget-numbers {
+      margin-top: ($widget-spacer / 2);
+      color: #357bb8;
+    }
+  }
+  .widget-die {
+    margin: -0.5rem 0 0;
+    display: block;
+    font-size: 16px;
+    color: #c9302c;
+    font-weight: 700;
+    text-align: center;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    & + .widget-numbers {
+      color: #c9302c;
       margin-top: ($widget-spacer / 2);
     }
   }
@@ -168,7 +245,7 @@ $widget-spacer: $spacer;
     }
 
     .widget-numbers {
-      margin-left: 0;
+      //margin-left: 0;
     }
 
     .widget-chart-content {
