@@ -7,8 +7,8 @@ import {User} from '../../../Model/user.model';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'Application/json'})
 };
-const apiUrl = 'http://52.165.229.168:8080/users';
-const apiDelete = 'http://52.165.229.168:8080/users/';
+const apiUrl = 'http://52.165.229.168:8080/api/users';
+const apiDelete = 'http://52.165.229.168:8080/api/users/';
 
 @Injectable({
   providedIn: 'root'
