@@ -41,7 +41,7 @@ import {TablesMainComponent} from './DemoPages/Tables/tables-main/tables-main.co
 
 // Widgets
 
-import {ChartBoxes3Component} from './DemoPages/Widgets/chart-boxes3/chart-boxes3.component';
+import {PatientComponent} from './DemoPages/Patient/patient.component';
 
 // Forms Elements
 
@@ -87,7 +87,7 @@ const routes: Routes = [
 
       // Widgets
 
-      {path: 'widgets/chart-boxes-3', component: ChartBoxes3Component, data: {extraParameter: 'pagesMenu3'}},
+      {path: 'admin/list-patient', component: PatientComponent, data: {extraParameter: 'pagesMenu3'}},
 
       // Forms Elements
 

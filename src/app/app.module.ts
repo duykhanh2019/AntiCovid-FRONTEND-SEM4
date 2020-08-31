@@ -82,7 +82,7 @@ import {TablesMainComponent} from './DemoPages/Tables/tables-main/tables-main.co
 
 // Widgets
 
-import {ChartBoxes3Component} from './DemoPages/Widgets/chart-boxes3/chart-boxes3.component';
+import {PatientComponent} from './DemoPages/Patient/patient.component';
 
 // Forms Elements
 
@@ -172,7 +172,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     // Dashboard Boxes
 
-    ChartBoxes3Component,
+    PatientComponent,
 
     // Form Elements
 
