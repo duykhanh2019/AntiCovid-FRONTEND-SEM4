@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PatientModel} from '../Model/patient.model';
 import {PatientService} from './patient.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
 
 
 @Component({

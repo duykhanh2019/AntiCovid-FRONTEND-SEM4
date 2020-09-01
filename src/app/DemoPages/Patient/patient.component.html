@@ -8,7 +8,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form>
+				<form name="form" form>
 					<div class="position-relative form-group">
 						<label for="name">Họ và tên</label>
 						<input name="name" id="name" placeholder="Nhập họ tên" type="text" class="form-control" required="required">
@@ -25,17 +25,12 @@
 						name="address" id="examplePassword" placeholder="Nhập địa điểm" type="text"
 						class="form-control"></div>
 					<div class="position-relative form-group"><label for="exampleText">Tình trạng bệnh nhân</label><textarea
-						name="text" id="exampleText" class="form-control"></textarea></div>
-					<div class="position-relative form-group"><label for="exampleFile">File</label><input name="file"
-					                                                                                      id="exampleFile"
-					                                                                                      type="file"
-					                                                                                      class="form-control-file">
-					</div>
+						name="text" id="exampleText" class="form-control" placeholder="Triệu chứng ho, sốt, khó thở, ..."></textarea></div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-				<button type="button" class="btn btn-primary">Thêm</button>
+				<button type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
+				<button type="submit" class="btn btn-primary">Thêm</button>
 			</div>
 		</ng-template>
 		<div class="page-title-actions mb-3 text-right">
