@@ -7,6 +7,7 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'Application/json'})
 };
 const apiUrl = 'http://localhost:8080/api/patients';
+const apiUrlDelete = 'http://52.165.229.168:8080/api/patients/';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class PatientService {
   public addPatient(objPatient) {
 
     return this.httpClient.post<any>('http://localhost:8080/api/patient', objPatient);
+  }
+
+  Delete(id: number): Observable<any> {
+    return this.httpClient.delete(apiUrlDelete + id).pipe();
   }
 }

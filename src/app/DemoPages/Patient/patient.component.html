@@ -121,7 +121,7 @@
 						<td>{{item.patientName}}</td>
 						<td>{{item.note}}</td>
 						<td>{{item.createdAt}}</td>
-<!--						<td><i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)"></i></td>-->
+						<td><i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)" style="cursor: pointer;font-size: 20px;color: red;"></i></td>
 					</tr>
 					</tbody>
 					<p *ngIf="datas.length == 0" style="text-align: center;margin-top: 20px;font-size: large;"> Không có bệnh nhân nào ! </p>
