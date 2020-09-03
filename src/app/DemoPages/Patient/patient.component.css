@@ -1,0 +1,19 @@
+
+.title {
+    min-width: 100px;
+}
+.ico-edit {
+    cursor: pointer;
+    font-size: 20px;
+    color: #2a2a2e;
+}
+
+.ico-trash {
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+}
+
+.no-data {
+    font-size: large;
+}
