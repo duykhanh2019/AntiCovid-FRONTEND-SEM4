@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
-  styles: []
+  styleUrls: ['patient.component.css']
 })
 export class PatientComponent implements OnInit {
 
@@ -58,7 +58,7 @@ export class PatientComponent implements OnInit {
     this.patientService.addPatient({patientName, note}).subscribe(
         res => {
           alert('Thêm bệnh nhân thành công.');
-          window.location.reload();
+          this.getAll();
         },
         error => {
           alert('Thêm thất bại!');
@@ -80,18 +80,22 @@ export class PatientComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
   getAll() {
     this.patientService.getAll().subscribe(
-        (res: any) => {
-          this.datas = res;
-        },
-        error =>
-            console.log('error')
+      (res: any) => {
+        this.datas = res;
+      }
     );
   }
-  onCloseModal(event: any) {
-    this.closeModalEvent.emit(false);
+
+  Delete(id: number) {
+    const confirmResult = confirm('Bạn có muốn xóa bệnh nhân này không?');
+    if (confirmResult) {
+      this.patientService.Delete(id).subscribe(res => {
+        alert('Đã xóa thành công');
+        this.getAll();
+      });
+    }
   }
 
 }
