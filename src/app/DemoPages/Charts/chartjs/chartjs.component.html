@@ -19,7 +19,7 @@
             <td>{{item.name}}</td>
             <td>{{item.lat}}</td>
             <td>{{item.lng}}</td>
-            <td><i class="vsm-icon pe-7s-trash ico-trash"></i></td>
+            <td><i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)" style="cursor: pointer;font-size: 20px;color: red;"></i></td>
           </tr>
           </tbody>
         </table>
