@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {LocationModel} from '../../Model/location.model';
+import {LocationService} from './location.service';
 
 @Component({
   selector: 'app-chartjs',
@@ -6,14 +8,21 @@ import {Component, OnInit} from '@angular/core';
   styles: []
 })
 export class ChartjsComponent implements OnInit {
-  heading = 'ChartJS';
-  subheading = 'Huge selection of charts created with the Vue ChartJS Plugin';
-  icon = 'pe-7s-bandaid icon-gradient bg-amy-crisp';
 
-  constructor() {
+  p = 1;
+  datas: LocationModel[] = [];
+  index: number;
+
+  constructor(private locationService: LocationService) {
   }
-
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getAll();
   }
-
+  getAll() {
+    this.locationService.getAll().subscribe(
+        (res: any) => {
+          this.datas = res;
+        }
+    );
+  }
 }
