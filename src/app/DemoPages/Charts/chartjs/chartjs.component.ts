@@ -25,4 +25,13 @@ export class ChartjsComponent implements OnInit {
         }
     );
   }
+  Delete(id: number) {
+    const confirmResult = confirm('Bạn có muốn xóa địa điểm này không?');
+    if (confirmResult) {
+      this.locationService.Delete(id).subscribe(res => {
+        alert('Đã xóa thành công');
+        this.getAll();
+      });
+    }
+  }
 }
