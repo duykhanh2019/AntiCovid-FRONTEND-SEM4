@@ -21,6 +21,13 @@
 	}
 </style>
 
+<div class="search-wrapper" [class.active]="isActive">
+	<div class="input-holder">
+		<input type="text" placeholder="Tìm tên bệnh nhân" class="search-input" [(ngModel)]="patientName" (input)="Search()">
+		<button class="search-icon" (click)="isActive = true"><span></span></button>
+	</div>
+	<button class="close" (click)="isActive = false"></button>
+</div>
 <div class="row">
 	<div class="col-lg-12">
 		<ng-template #content let-c="close" let-d="dismiss">
@@ -182,7 +189,7 @@
 				<table class="mb-0 table table-striped">
 					<thead>
 					<tr class="text-center">
-						<th>STT</th>
+<!--						<th>STT</th>-->
 						<th class="title">Bệnh nhân</th>
 						<th>Tỉnh</th>
 						<th>Ghi chú</th>
@@ -190,8 +197,8 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr class="text-center" *ngFor="let item of datas | paginate: { itemsPerPage: 20, currentPage: p }; let i = index" >
-						<td>{{ i + 1 }}</td>
+					<tr class="text-center" *ngFor="let item of datas | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" >
+<!--						<td>{{ i + 1 }}</td>-->
 						<td>{{item.patientName}}</td>
 						<td class="text-left">{{item.note}}</td>
 						<td>{{item.createdAt}}</td>
@@ -201,7 +208,7 @@
 	          </td>
 					</tr>
 					</tbody>
-					<p *ngIf="datas.length == 0" class="no-data text-center mt-3" > Không có bệnh nhân nào ! </p>
+					<td *ngIf="datas.length == 0" class="no-data text-center mt-3 w-100" > Không có bệnh nhân nào ! </td>
 				</table>
 			</div>
 		</div>

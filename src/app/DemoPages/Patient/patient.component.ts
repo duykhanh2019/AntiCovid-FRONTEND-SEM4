@@ -22,6 +22,9 @@ export class PatientComponent implements OnInit {
   index: number;
   modalReference: any;
   question: any = {};
+  patientName: string;
+  public isActive: any;
+  values = '';
 
   @Output() closeModalEvent = new EventEmitter<boolean>();
   // tslint:disable-next-line:max-line-length
@@ -47,6 +50,15 @@ export class PatientComponent implements OnInit {
       updateNote: ['', [Validators.required]],
       updateVerifyDate: ['', [Validators.required]]
     });
+  }
+  Search() {
+    if (this.patientName !== '') {
+      this.datas = this.datas.filter(res => {
+        return res.patientName.toLocaleLowerCase().match(this.patientName.toLocaleLowerCase());
+      });
+    } else if (this.patientName === '') {
+      this.ngOnInit();
+    }
   }
 
   open(content) {
