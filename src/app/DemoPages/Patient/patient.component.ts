@@ -13,12 +13,18 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class PatientComponent implements OnInit {
 
   registerForm: FormGroup;
+  updateForm: FormGroup;
   submitted = false;
   closeResult: string;
   p = 1;
   datas: PatientModel[] = [];
+  dataPatient: PatientModel[];
   index: number;
   modalReference: any;
+  question: any = {};
+  patientName: string;
+  public isActive: any;
+  values = '';
 
   @Output() closeModalEvent = new EventEmitter<boolean>();
   // tslint:disable-next-line:max-line-length
@@ -35,10 +41,36 @@ export class PatientComponent implements OnInit {
       note: ['', [Validators.required]],
       verifyDate: ['', [Validators.required]]
     });
+    this.updateForm = this.formBuilder.group({
+      updateName: ['', Validators.required],
+      updateLat: ['', Validators.required],
+      updateLng: ['', [Validators.required]],
+      updateAddress: ['', [Validators.required]],
+      updatePatientGroup: ['', [Validators.required]],
+      updateNote: ['', [Validators.required]],
+      updateVerifyDate: ['', [Validators.required]]
+    });
+  }
+  Search() {
+    if (this.patientName !== '') {
+      this.datas = this.datas.filter(res => {
+        return res.patientName.toLocaleLowerCase().match(this.patientName.toLocaleLowerCase());
+      });
+    } else if (this.patientName === '') {
+      this.ngOnInit();
+    }
   }
 
   open(content) {
     this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  openUpdatePatient(patient, id: number) {
+    this.getPatient(id);
+    this.modalService.open(patient).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -66,6 +98,12 @@ export class PatientComponent implements OnInit {
         }
     );
   }
+  onSubmitUpdate() {
+    this.submitted = true;
+    if (this.updateForm.invalid) {
+      return;
+    }
+  }
   add(buttonvalue) {
     if (buttonvalue === 'with save') {
       this.modalReference.close();
@@ -84,6 +122,16 @@ export class PatientComponent implements OnInit {
     this.patientService.getAll().subscribe(
       (res: any) => {
         this.datas = res;
+      }
+    );
+  }
+  getPatient(id: number) {
+    this.patientService.getPatient(id).subscribe(
+      (res: any) => {
+        this.dataPatient = res;
+        this.updateForm.patchValue({
+          updateName: this.question.updateName,
+        });
       }
     );
   }

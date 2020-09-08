@@ -8,6 +8,7 @@ const httpOptions = {
 };
 const apiUrl = 'http://52.165.229.168:8080/api/patients';
 const apiUrlDelete = 'http://52.165.229.168:8080/api/patient/';
+const apiUrlPatient = 'http://52.165.229.168:8080/api/patient/';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,8 @@ export class PatientService {
 
   Delete(id: number): Observable<any> {
     return this.httpClient.delete(apiUrlDelete + id).pipe();
+  }
+  getPatient(id: number): Observable<any> {
+    return this.httpClient.get(apiUrlPatient + id).pipe();
   }
 }

@@ -21,6 +21,13 @@
 	}
 </style>
 
+<div class="search-wrapper" [class.active]="isActive">
+	<div class="input-holder">
+		<input type="text" placeholder="Tìm tên bệnh nhân" class="search-input" [(ngModel)]="patientName" (input)="Search()">
+		<button class="search-icon" (click)="isActive = true"><span></span></button>
+	</div>
+	<button class="close" (click)="isActive = false"></button>
+</div>
 <div class="row">
 	<div class="col-lg-12">
 		<ng-template #content let-c="close" let-d="dismiss">
@@ -102,12 +109,87 @@
 				Thêm bệnh nhân
 			</button>
 		</div>
+
+<!--				update patient form-->
+		<ng-template #patient let-c="close" let-d="dismiss">
+			<div class="modal-header">
+				<h4 class="modal-title">Sửa thông tin bệnh nhân</h4>
+				<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form name="form" [formGroup]="updateForm" (ngSubmit)="onSubmitUpdate()">
+					<div class="position-relative form-group">
+						<label for="updateName"></label>
+						<input name="updateName" id="updateName" formControlName="updateName" type="text" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && f.updateName.errors}" placeholder="BN-00" pattern="^(?=.[BN]).*$">
+						<div *ngIf="submitted && f.updateName.errors" class="invalid-feedback">
+							<div *ngIf="f.updateName.errors.required">Nhập tên bệnh nhân</div>
+							<div *ngIf="f.updateName.errors.pattern">Nhập sai định dạng</div>
+						</div>
+					</div>
+					<div class="position-relative form-group">
+						<label for="updateAddress">Tỉnh/TP</label>
+						<input name="updateAddress" id="updateAddress" formControlName="updateAddress" type="text" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && f.updateAddress.errors }">
+						<div *ngIf="submitted && f.updateAddress.errors" class="invalid-feedback">
+							<div *ngIf="f.updateAddress.errors.required">Nhập địa điểm</div>
+						</div>
+					</div>
+					<div class="position-relative form-group">
+						<label for="updateLat">Vĩ độ</label>
+						<input name="updateLat" id="updateLat" formControlName="updateLat" type="text" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && f.updateLat.errors }">
+						<div *ngIf="submitted && f.updateLat.errors" class="invalid-feedback">
+							<div *ngIf="f.updateLat.errors.required">Nhập vĩ độ</div>
+						</div>
+					</div>
+					<div class="position-relative form-group">
+						<label for="updateLng">Kinh độ</label>
+						<input id="updateLng" formControlName="updateLng" type="text" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && f.updateLng.errors }">
+						<div *ngIf="submitted && f.updateLng.errors" class="invalid-feedback">
+							<div *ngIf="f.updateLng.errors.required">Nhập kinh độ</div>
+						</div>
+					</div>
+					<div class="position-relative form-group">
+						<label for="updatePatientGroup">Nhóm bệnh</label>
+						<input name="updatePatientGroup" id="updatePatientGroup" formControlName="updatePatientGroup" type="text" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && f.updatePatientGroup.errors }">
+						<div *ngIf="submitted && f.updatePatientGroup.errors" class="invalid-feedback">
+							<div *ngIf="f.updatePatientGroup.errors.required">Nhập nhóm bệnh nhân</div>
+						</div>
+					</div>
+					<div class="position-relative form-group">
+						<label for="updateNote">Ghi chú</label>
+						<input name="note" id="updateNote" formControlName="updateNote" type="text" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && f.updateNote.errors }">
+						<div *ngIf="submitted && f.updateNote.errors" class="invalid-feedback">
+							<div *ngIf="f.updateNote.errors.required">Nhập nhóm bệnh nhân</div>
+						</div>
+					</div>
+					<div class="position-relative form-group">
+						<label for="updateVerifyDate">Ngày tiếp nhận</label>
+						<input name="updateVerifyDate" id="updateVerifyDate" formControlName="updateVerifyDate" type="date" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && f.updateVerifyDate.errors }">
+						<div *ngIf="submitted && f.updateVerifyDate.errors" class="invalid-feedback">
+							<div *ngIf="f.updateVerifyDate.errors.required">Nhập ngày mắc bệnh</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
+						<button type="submit" class="btn btn-primary">Lưu</button>
+					</div>
+				</form>
+			</div>
+		</ng-template>
 		<div class="main-card mb-3 card" >
 			<div class="card-body">
 				<table class="mb-0 table table-striped">
 					<thead>
 					<tr class="text-center">
-						<th>STT</th>
+<!--						<th>STT</th>-->
 						<th class="title">Bệnh nhân</th>
 						<th>Tỉnh</th>
 						<th>Ghi chú</th>
@@ -115,18 +197,18 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr class="text-center" *ngFor="let item of datas | paginate: { itemsPerPage: 20, currentPage: p }; let i = index" >
-						<td>{{ i + 1 }}</td>
+					<tr class="text-center" *ngFor="let item of datas | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" >
+<!--						<td>{{ i + 1 }}</td>-->
 						<td>{{item.patientName}}</td>
 						<td class="text-left">{{item.note}}</td>
 						<td>{{item.createdAt}}</td>
 						<td>
-                            <i class="vsm-icon pe-7s-config mr-2 ico-edit"></i>
-                            <i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)"></i>
-                        </td>
+              <i class="vsm-icon pe-7s-config mr-2 ico-edit" (click)="openUpdatePatient(patient, item.id)"></i>
+              <i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)"></i>
+	          </td>
 					</tr>
 					</tbody>
-					<p *ngIf="datas.length == 0" class="no-data text-center mt-3" > Không có bệnh nhân nào ! </p>
+					<td *ngIf="datas.length == 0" class="no-data text-center mt-3 w-100" > Không có bệnh nhân nào ! </td>
 				</table>
 			</div>
 		</div>
