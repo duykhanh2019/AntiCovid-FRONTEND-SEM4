@@ -51,6 +51,7 @@ import {LayoutComponent} from './DemoPages/Forms/Elements/layout/layout.componen
 // Charts
 
 import {ChartjsComponent} from './DemoPages/Charts/chartjs/chartjs.component';
+import {UpdatePatientComponent} from "./DemoPages/Patient/update-patient/update-patient.component";
 
 const routes: Routes = [
   {
@@ -87,7 +88,8 @@ const routes: Routes = [
 
       // Widgets
 
-      {path: 'admin/list-patient', component: PatientComponent, data: {extraParameter: 'pagesMenu3'}},
+      {path: 'admin/list-patient', component: PatientComponent, data: {extraParameter: ''}},
+      {path: 'admin/patient/edit', component: UpdatePatientComponent, data: {extraParameter: ''}},
 
       // Forms Elements
 
