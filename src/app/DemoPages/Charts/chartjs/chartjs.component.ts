@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {LocationModel} from '../../Model/location.model';
 import {LocationService} from './location.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -18,6 +18,7 @@ export class ChartjsComponent implements OnInit {
   datas: LocationModel[] = [];
   index: number;
 
+  @ViewChild('btnClose') btnClose: ElementRef;
   @Output() closeModalEvent = new EventEmitter<boolean>();
   constructor(private locationService: LocationService , private modalService: NgbModal, private formBuilder: FormBuilder) {
   }
@@ -30,7 +31,9 @@ export class ChartjsComponent implements OnInit {
     });
   }
   open(content) {
-    this.modalService.open(content).result.then((result) => {
+    this.registerForm.reset();
+    this.modalReference = this.modalService.open(content);
+    this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -48,8 +51,9 @@ export class ChartjsComponent implements OnInit {
     const lng = this.f.lng.value;
     this.locationService.addLocation({name, lat, lng}).subscribe(
         res => {
+          this.modalReference.close();
           alert('Thêm địa điểm thành công.');
-          window.location.reload();
+          this.getAll();
         },
         error => {
           alert('Thêm thất bại!');
