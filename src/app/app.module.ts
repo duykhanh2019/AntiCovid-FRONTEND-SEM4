@@ -58,7 +58,7 @@ import {RegisterBoxedComponent} from './DemoPages/UserPages/register-boxed/regis
 
 // Elements
 
-import {StandardComponent} from './DemoPages/Elements/Buttons/standard/standard.component';
+import {StandardComponent} from './DemoPages/User/user.component';
 import {DropdownsComponent} from './DemoPages/Elements/dropdowns/dropdowns.component';
 import {CardsComponent} from './DemoPages/Elements/cards/cards.component';
 import {ListGroupsComponent} from './DemoPages/Elements/list-groups/list-groups.component';
@@ -91,7 +91,7 @@ import {LayoutComponent} from './DemoPages/Forms/Elements/layout/layout.componen
 
 // Charts
 
-import {ChartjsComponent} from './DemoPages/Charts/chartjs/chartjs.component';
+import {LocationComponent} from './DemoPages/Location/location.component';
 
 // Chart.js Examples
 
@@ -182,7 +182,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     // CHARTS
 
-    ChartjsComponent,
+    LocationComponent,
 
     // Chart.js Examples
 

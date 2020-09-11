@@ -18,7 +18,7 @@ import {RegisterBoxedComponent} from './DemoPages/UserPages/register-boxed/regis
 
 // Elements
 
-import {StandardComponent} from './DemoPages/Elements/Buttons/standard/standard.component';
+import {StandardComponent} from './DemoPages/User/user.component';
 import {DropdownsComponent} from './DemoPages/Elements/dropdowns/dropdowns.component';
 import {CardsComponent} from './DemoPages/Elements/cards/cards.component';
 import {ListGroupsComponent} from './DemoPages/Elements/list-groups/list-groups.component';
@@ -50,8 +50,8 @@ import {LayoutComponent} from './DemoPages/Forms/Elements/layout/layout.componen
 
 // Charts
 
-import {ChartjsComponent} from './DemoPages/Charts/chartjs/chartjs.component';
-import {UpdatePatientComponent} from "./DemoPages/Patient/update-patient/update-patient.component";
+import {LocationComponent} from './DemoPages/Location/location.component';
+import {UpdatePatientComponent} from './DemoPages/Patient/update-patient/update-patient.component';
 
 const routes: Routes = [
   {
@@ -98,7 +98,7 @@ const routes: Routes = [
 
       // Charts
 
-      {path: 'charts/chartjs', component: ChartjsComponent, data: {extraParameter: ''}},
+      {path: 'admin/location', component: LocationComponent, data: {extraParameter: ''}},
 
     ]
 
