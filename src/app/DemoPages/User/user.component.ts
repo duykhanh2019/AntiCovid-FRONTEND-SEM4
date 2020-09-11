@@ -1,20 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../../Model/user.model';
-import {StandardService} from './standard.service';
+import {User} from '../Model/user.model';
+import {UserService} from './user.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @Component({
-  selector: 'app-standard',
-  templateUrl: './standard.component.html',
-  styleUrls: ['./standard.component.css']
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
 
 export class StandardComponent implements OnInit {
   p = 1;
   datas: User[] = [];
   index: number;
-  constructor(private standardService: StandardService) { }
+  constructor(private standardService: UserService) { }
   ngOnInit(): void {
     this.getAll();
   }

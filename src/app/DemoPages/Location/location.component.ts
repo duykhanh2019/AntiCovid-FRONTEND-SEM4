@@ -1,15 +1,15 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {LocationModel} from '../../Model/location.model';
+import {LocationModel} from '../Model/location.model';
 import {LocationService} from './location.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-chartjs',
-  templateUrl: './chartjs.component.html',
+  selector: 'app-location',
+  templateUrl: './location.component.html',
   styles: []
 })
-export class ChartjsComponent implements OnInit {
+export class LocationComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   closeResult: string;
