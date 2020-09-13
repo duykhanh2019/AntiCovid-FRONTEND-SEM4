@@ -52,6 +52,7 @@ import {LayoutComponent} from './DemoPages/Forms/Elements/layout/layout.componen
 
 import {LocationComponent} from './DemoPages/Location/location.component';
 import {UpdatePatientComponent} from './DemoPages/Patient/update-patient/update-patient.component';
+import { AddPatientComponent } from './DemoPages/Location/AddPatient/add-patient.component';
 
 const routes: Routes = [
   {
@@ -99,6 +100,7 @@ const routes: Routes = [
       // Charts
 
       {path: 'admin/location', component: LocationComponent, data: {extraParameter: ''}},
+      {path: 'admin/location/add-patient', component: AddPatientComponent, data: {extraParameter: ''}},
 
     ]
 

@@ -1,0 +1,73 @@
+<style>
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .form-control:valid {
+    background-image: none;
+  }
+
+
+  .form-control:is-invalid {
+    background-image: none;
+  }
+</style>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="main-card mb-3 card">
+      <div class="card-body"><h5 class="card-title">Thêm bệnh nhân vào khu vực</h5>
+        <form>
+          <select class="mb-5 form-control">
+            <option>Danh sách bệnh nhân</option>
+            <option>Danh sách bệnh nhân</option>
+            <option>Danh sách bệnh nhân</option>
+            <option>Danh sách bệnh nhân</option>
+            <option>Danh sách bệnh nhân</option>
+            <option>Danh sách bệnh nhân</option>
+          </select>
+          <div class="row">
+            <div class="col-6">
+              <label for="">Tên bệnh nhân</label><br>
+            </div>
+            <div class="col-5">
+              <label for="">Ngày mắc bệnh</label><br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <input placeholder="default" type="text" class="mb-2 col-10 form-control">
+            </div>
+            <div class="col-5">
+              <input placeholder="default" type="date" class="mb-2 col-8 form-control">
+            </div>
+            <button class="mb-2 mr-2 btn btn-danger">X</button>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <input placeholder="default" type="text" class="mb-2 col-10 form-control">
+            </div>
+            <div class="col-5">
+              <input placeholder="default" type="date" class="mb-2 col-8 form-control">
+            </div>
+            <button class="mb-2 mr-2 btn btn-danger" (click)="deleteMsg(msg)">X</button>
+          </div>
+          <hr>
+          <div>
+            <button class="btn-shadow d-inline-flex align-items-center btn btn-success">Thêm tất cả</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
