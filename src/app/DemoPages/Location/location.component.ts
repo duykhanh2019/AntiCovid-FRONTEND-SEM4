@@ -39,6 +39,15 @@ export class LocationComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+  addPatient(content) {
+    this.registerForm.reset();
+    this.modalReference = this.modalService.open(content);
+    this.modalReference.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
   get f() { return this.registerForm.controls; }
   onSubmit() {
     this.submitted = true;
