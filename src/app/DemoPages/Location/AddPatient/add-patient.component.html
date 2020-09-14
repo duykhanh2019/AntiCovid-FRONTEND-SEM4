@@ -25,9 +25,9 @@
   <div class="col-md-8">
     <div class="main-card mb-3 card">
       <div class="card-body"><h5 class="card-title">Thêm bệnh nhân vào khu vực</h5>
-        <form>
-          <select class="mb-5 form-control">
-            <option>Danh sách bệnh nhân</option>
+        <form [formGroup]="addPatientForm" (ngSubmit)="onSubmit()">
+          <select class="mb-5 form-control" *ngFor="let item of patientData; let i = index">
+            <option>{{item.patientName}}</option>
             <option>Danh sách bệnh nhân</option>
             <option>Danh sách bệnh nhân</option>
             <option>Danh sách bệnh nhân</option>
@@ -47,7 +47,11 @@
               <input placeholder="default" type="text" class="mb-2 col-10 form-control">
             </div>
             <div class="col-5">
-              <input placeholder="default" type="date" class="mb-2 col-8 form-control">
+            <input name="verifyDate" id="verifyDate" formControlName="verifyDate" type="date" class="mb-2 col-8 form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.verifyDate.errors }">
+              <div *ngIf="submitted && f.verifyDate.errors" class="invalid-feedback">
+                <div *ngIf="f.verifyDate.errors.required">Nhập ngày mắc bệnh</div>
+              </div>
             </div>
             <button class="mb-2 mr-2 btn btn-danger">X</button>
           </div>
