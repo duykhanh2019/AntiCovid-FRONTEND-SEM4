@@ -12,17 +12,19 @@ export class AddPatientComponent implements OnInit {
 
   public isActive: any;
   private data: string[] = [];
-  addPatientForm: FormGroup;
+  addPatientLocationForm: FormGroup;
   submitted = false;
   patientData: PatientModel[] = [];
-
+  public name;
+  public verifyDate;
+  public note;
 
   constructor(private formBuilder: FormBuilder, private addPatientService: AddPatientService) { }
 
   ngOnInit() {
     this.getAll();
 
-    this.addPatientForm = this.formBuilder.group({
+    this.addPatientLocationForm = this.formBuilder.group({
       name: ['', Validators.required],
       verifyDate: ['', [Validators.required]]
     });
@@ -34,7 +36,7 @@ export class AddPatientComponent implements OnInit {
       }
     );
   }
-  get f() { return this.addPatientForm.controls; }
+  get f() { return this.addPatientLocationForm.controls; }
   deleteMsg(msg: string) {
     const index: number = this.data.indexOf(msg);
     if (index !== -1) {
@@ -44,9 +46,13 @@ export class AddPatientComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.addPatientForm.invalid) {
+    if (this.addPatientLocationForm.invalid) {
       return;
     }
   }
-
+  back() {
+    this.name = '';
+    this.verifyDate = '';
+    this.note = '';
+  }
 }
