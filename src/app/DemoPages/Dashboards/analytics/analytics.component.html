@@ -1,12 +1,17 @@
 <!--<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>-->
 
 <div class="row">
-  <div class="card-border mb-3 card card-body border-focus"><h5 class="card-title">ANTI COVID</h5>Trang quản lý danh sách bệnh nhân viêm đường hô hấp cấp Covid-19
+  <div class="card-border mb-3 card card-body border-focus"><h5 class="card-title">ANTI COVID
+    <span class="mr-2 opacity-7">
+      <i class="fa fa-cog fa-spin"></i>
+    </span>
+  </h5>
+    Trang quản lý danh sách bệnh nhân viêm đường hô hấp cấp Covid-19
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-7">
+  <div class="col-8">
     <div class="mb-3 card">
       <div class="no-gutters row">
       <div class="col-xl-2">
@@ -21,7 +26,7 @@
         <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
           <div class="widget-chart-content">
             <div class="widget-infection">SỐ CA NHIỄM</div>
-            <div class="widget-numbers"><span>9M</span></div>
+            <div class="widget-numbers"><span>1.063</span></div>
           </div>
         </div>
         <div class="divider m-0 d-md-none d-sm-block"></div>
@@ -30,7 +35,7 @@
         <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
           <div class="widget-chart-content">
             <div class="widget-treatment">ĐANG ĐIỀU TRỊ</div>
-            <div class="widget-numbers"><span>$563</span></div>
+            <div class="widget-numbers"><span>99</span></div>
           </div>
         </div>
       </div>
@@ -38,7 +43,7 @@
         <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
           <div class="widget-chart-content">
             <div class="widget-cured">KHỎI</div>
-            <div class="widget-numbers"><span>$563</span></div>
+            <div class="widget-numbers"><span>926</span></div>
           </div>
         </div>
       </div>
@@ -46,7 +51,7 @@
         <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
           <div class="widget-chart-content">
             <div class="widget-die">TỬ VONG</div>
-            <div class="widget-numbers"><span>$563</span></div>
+            <div class="widget-numbers"><span>35</span></div>
           </div>
         </div>
       </div>
@@ -65,7 +70,7 @@
         <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
           <div class="widget-chart-content">
             <div class="widget-infection">TỔNG CA NHIỄM</div>
-            <div class="widget-numbers"><span>9M</span></div>
+            <div class="widget-numbers"><span>29.432.878</span></div>
           </div>
         </div>
         <div class="divider m-0 d-md-none d-sm-block"></div>
@@ -74,7 +79,7 @@
         <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
           <div class="widget-chart-content">
             <div class="widget-treatment">ĐANG ĐIỀU TRỊ</div>
-            <div class="widget-numbers"><span>$563</span></div>
+            <div class="widget-numbers"><span>7.236.332</span></div>
           </div>
         </div>
       </div>
@@ -82,7 +87,7 @@
         <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
           <div class="widget-chart-content">
             <div class="widget-cured">KHỎI</div>
-            <div class="widget-numbers"><span>$563</span></div>
+            <div class="widget-numbers"><span>21.264.325</span></div>
           </div>
         </div>
       </div>
@@ -90,7 +95,7 @@
         <div class="card no-shadow rm-border bg-transparent widget-chart text-left">
           <div class="widget-chart-content">
             <div class="widget-die">TỬ VONG</div>
-            <div class="widget-numbers"><span>$563</span></div>
+            <div class="widget-numbers"><span>932.379</span></div>
           </div>
         </div>
       </div>
@@ -106,41 +111,8 @@
   <div class="col-md-3">
     <div id="map">
       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7864040.491066362!2d101.41541198055391!3d15.758357529189878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31157a4d736a1e5f%3A0xb03bb0c9e2fe62be!2sVietnam!5e0!3m2!1sen!2s!4v1598458059625!5m2!1sen!2s"
-              width="350px" height="450" frameborder="0" style="border-radius:3px;" allowfullscreen="" aria-hidden="false" tabindex="0">
+              width="300px" height="450" frameborder="0" style="border-radius:3px;" allowfullscreen="" aria-hidden="false" tabindex="0">
       </iframe>
     </div>
-    <div class="mt-3">
-      <a href="https://ncov.moh.gov.vn/documents/20182/6848000/Duongdaynong/69d6a130-defa-4cbc-92f7-67d50937d68f?t=1581123135834">
-        <img src="https://ncov.moh.gov.vn/documents/20182/6848000/dnnong.jpg/4cf1fea6-7856-4fe0-bbef-50a7c2dc0ba8?t=1581317123857" alt="" width="350px" style="border-radius: 3px">
-      </a>
-    </div>
   </div>
-</div>
-
-<div class="card main-card mb-3">
-  <div class="card-header">
-    Basic
-  </div>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Country</th>
-      <th scope="col">Area</th>
-      <th scope="col">Population</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let country of countries; index as i">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>
-        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2"
-             style="width: 20px">
-        {{ country.name }}
-      </td>
-      <td>{{ country.area | number }}</td>
-      <td>{{ country.population | number }}</td>
-    </tr>
-    </tbody>
-  </table>
 </div>

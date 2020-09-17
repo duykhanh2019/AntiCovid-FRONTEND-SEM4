@@ -14,6 +14,7 @@ export class StandardComponent implements OnInit {
   p = 1;
   datas: User[] = [];
   index: number;
+  public isActive: any;
   constructor(private standardService: UserService) { }
   ngOnInit(): void {
     this.getAll();
