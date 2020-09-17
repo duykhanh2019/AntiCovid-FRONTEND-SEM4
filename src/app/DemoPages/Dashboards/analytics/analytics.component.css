@@ -3,6 +3,8 @@
     height: 50px;
     align-items: center;
     justify-content: center;
+    min-width: 93px;
+    cursor: auto!important;
 }
 
 .btn-foreign {
@@ -10,4 +12,6 @@
     height: 50px;
     align-items: center;
     justify-content: center;
+    min-width: 93px;
+    cursor: auto!important;
 }
