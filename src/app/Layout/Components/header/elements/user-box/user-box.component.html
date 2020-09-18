@@ -1,9 +1,57 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Thông tin bệnh nhân</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form name="form" [formGroup]="registerForm">
+      <div class="position-relative form-group">
+        <label for="userName">Họ và Tên</label>
+        <input name="userName" id="userName" formControlName="userName" type="text" class="form-control">
+<!--        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
+<!--          <div *ngIf="f.name.errors.required">Nhập tên bệnh nhân</div>-->
+<!--          <div *ngIf="f.name.errors.pattern">Nhập sai định dạng</div>-->
+<!--        </div>-->
+      </div>
+      <div class="position-relative form-group">
+        <label for="phone">Số điện thoại</label>
+        <input name="phone" id="phone" formControlName="phone" type="text" class="form-control">
+<!--               [ngClass]="{ 'is-invalid': submitted && f.address.errors }">-->
+<!--        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">-->
+<!--          <div *ngIf="f.address.errors.required">Nhập địa điểm</div>-->
+<!--        </div>-->
+      </div>
+      <div class="position-relative form-group">
+        <label for="address">Địa chỉ</label>
+        <input name="address" id="address" formControlName="address" type="text" class="form-control">
+<!--               [ngClass]="{ 'is-invalid': submitted && f.lat.errors }">-->
+<!--        <div *ngIf="submitted && f.lat.errors" class="invalid-feedback">-->
+<!--          <div *ngIf="f.lat.errors.required">Nhập vĩ độ</div>-->
+<!--        </div>-->
+      </div>
+      <div class="position-relative form-group">
+        <label for="email">Email</label>
+        <input name="email" id="email" formControlName="email" type="text" class="form-control">
+<!--               [ngClass]="{ 'is-invalid': submitted && f.lng.errors }">-->
+<!--        <div *ngIf="submitted && f.lng.errors" class="invalid-feedback">-->
+<!--          <div *ngIf="f.lng.errors.required">Nhập kinh độ</div>-->
+<!--        </div>-->
+      </div>
+    </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
+        <button type="submit" class="btn btn-primary">Sửa</button>
+      </div>
+  </div>
+</ng-template>
 <div class="d-flex">
   <div class="header-btn-lg pr-0">
     <div class="widget-content p-0">
       <div class="widget-content-wrapper">
         <div class="widget-content-left">
-          <div class="btn-group" ngbDropdown placement="bottom-right">
+          <div class="btn-group" ngbDropdown placement="bottom-right" >
             <button type="button" class="btn btn-link p-0 mr-2" ngbDropdownToggle>
               <span>
                 <div class="icon-wrapper icon-wrapper-alt rounded-circle">
@@ -11,15 +59,15 @@
                 </div>
               </span>
             </button>
-            <div ngbDropdownMenu>
-              <button class="dropdown-item">Thông tin cá nhân</button>
-              <button class="dropdown-item">Cài đặt</button>
-              <button class="dropdown-item">Số ca nhiễm bệnh</button>
-              <div class="dropdown-divider"></div>
-              <button class="dropdown-item">
-                <a routerLink="/pages/login">Đăng xuất</a>
-              </button>
-            </div>
+              <div ngbDropdownMenu>
+                <button class="dropdown-item" (click)="openUserDetail(content)">Thông tin cá nhân</button>
+                <!--              <button class="dropdown-item">Cài đặt</button>-->
+                <!--              <button class="dropdown-item">Số ca nhiễm bệnh</button>-->
+                <!--              <div class="dropdown-divider"></div>-->
+                <button class="dropdown-item" (click)="logout()">
+                  <a>Đăng xuất</a>
+                </button>
+              </div>
           </div>
         </div>
       </div>
