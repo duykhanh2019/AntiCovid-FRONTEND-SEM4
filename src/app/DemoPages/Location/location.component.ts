@@ -14,6 +14,8 @@ export class LocationComponent implements OnInit {
   submitted = false;
   closeResult: string;
   modalReference: any;
+  public isActive: any;
+  name: string;
   p = 1;
   datas: LocationModel[] = [];
   index: number;
@@ -101,4 +103,14 @@ export class LocationComponent implements OnInit {
       });
     }
   }
+  Search() {
+    if (this.name !== '') {
+      this.datas = this.datas.filter(res => {
+        return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
+      });
+    } else if (this.name === '') {
+      this.ngOnInit();
+    }
+  }
+
 }

@@ -25,53 +25,57 @@
   <div class="col-md-8">
     <div class="main-card mb-3 card">
       <div class="card-body"><h5 class="card-title">Thêm bệnh nhân vào khu vực</h5>
-        <form [formGroup]="addPatientForm" (ngSubmit)="onSubmit()">
-          <select class="mb-5 form-control" *ngFor="let item of patientData; let i = index">
-            <option>{{item.patientName}}</option>
-            <option>Danh sách bệnh nhân</option>
-            <option>Danh sách bệnh nhân</option>
-            <option>Danh sách bệnh nhân</option>
-            <option>Danh sách bệnh nhân</option>
-            <option>Danh sách bệnh nhân</option>
-          </select>
-          <div class="row">
-            <div class="col-6">
+        <hr>
+        <form [formGroup]="addPatientLocationForm" (ngSubmit)="onSubmit()">
+          <div class="row mt-5">
+          </div>
+          <div class="row mb-2">
+            <div class="col-3">
               <label for="">Tên bệnh nhân</label><br>
             </div>
-            <div class="col-5">
-              <label for="">Ngày mắc bệnh</label><br>
+            <div class="col-7">
+              <select name="name" id="name" formControlName="name" type="text" class="form-control"
+                     [ngClass]="{'is-invalid': submitted && f.name.errors}">
+                <option value="1">khanh</option>
+                <option value="2">duy</option>
+                <option value="3">pham</option>
+              </select>
+              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Nhập tên bệnh nhân</div>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-6">
-              <input placeholder="default" type="text" class="mb-2 col-10 form-control">
+          <div class="row mb-2">
+            <div class="col-3">
+              <label for="">Ngày xác nhận</label><br>
             </div>
-            <div class="col-5">
-            <input name="verifyDate" id="verifyDate" formControlName="verifyDate" type="date" class="mb-2 col-8 form-control"
-                   [ngClass]="{ 'is-invalid': submitted && f.verifyDate.errors }">
+            <div class="col-7">
+              <input name="verifyDate" id="verifyDate" formControlName="verifyDate" type="date" class="mb-2 form-control"
+                     [ngClass]="{ 'is-invalid': submitted && f.verifyDate.errors }">
               <div *ngIf="submitted && f.verifyDate.errors" class="invalid-feedback">
                 <div *ngIf="f.verifyDate.errors.required">Nhập ngày mắc bệnh</div>
               </div>
             </div>
-            <button class="mb-2 mr-2 btn btn-danger">X</button>
           </div>
           <div class="row">
-            <div class="col-6">
-              <input placeholder="default" type="text" class="mb-2 col-10 form-control">
+            <div class="col-3">
+              <label for="">Ghi chú</label><br>
             </div>
-            <div class="col-5">
-              <input placeholder="default" type="date" class="mb-2 col-8 form-control">
+            <div class="col-7">
+              <textarea name="" placeholder="Ghi chú" id="" rows="4" style="width: 100%; outline: none; padding: 7px"></textarea>
             </div>
-            <button class="mb-2 mr-2 btn btn-danger" (click)="deleteMsg(msg)">X</button>
           </div>
           <hr>
-          <div>
-            <button class="btn-shadow d-inline-flex align-items-center btn btn-success">Thêm tất cả</button>
+          <div class="float-right mr-5 pr-5">
+            <button class="btn-shadow d-inline-flex align-items-center btn btn-secondary"
+                    style="min-width: 86px; margin-right: 10px; justify-content: center"
+            >
+              <a routerLink="/admin/location" >Quay lại</a>
+            </button>
+            <button class="btn-shadow d-inline-flex align-items-center btn btn-success">Thêm vào</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
