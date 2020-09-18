@@ -10,7 +10,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {LoadingBarRouterModule} from '@ngx-loading-bar/router';
 
 import {CommonModule} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 
@@ -106,6 +106,8 @@ import {DoughnutChartComponent} from './DemoPages/Charts/chartjs/examples/doughn
 import {PieChartComponent} from './DemoPages/Charts/chartjs/examples/pie-chart/pie-chart.component';
 import { UpdatePatientComponent } from './DemoPages/Patient/update-patient/update-patient.component';
 import { AddPatientComponent } from './DemoPages/Location/AddPatient/add-patient.component';
+import {JwtInterceptor} from "./_helpers/jwt.interceptor";
+import {ErrorInterceptor} from "./_helpers/error.interceptor";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -222,6 +224,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgxPaginationModule,
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {
       provide:
       PERFECT_SCROLLBAR_CONFIG,
