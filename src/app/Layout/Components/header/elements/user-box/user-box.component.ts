@@ -48,6 +48,6 @@ export class UserBoxComponent implements OnInit {
 
     logout() {
       localStorage.removeItem('currentUser');
-      this.router.navigateByUrl('/pages/login');
+      window.location.reload();
     }
 }
