@@ -71,6 +71,68 @@
         </form>
       </div>
     </ng-template>
+
+<!--    Modal list patient-->
+    <ng-template #patientLocation let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">Danh sách bệnh nhân tại địa điểm</h4>
+        <button #btnClose type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body ml-2">
+        <div class="position-relative form-group" style="height: 300px; overflow: auto">
+          <div *ngFor="let patient of currentHospital[0].patient">
+            <p>{{patient.patientName}}</p>
+          </div>
+        </div>
+        <hr>
+        <form [formGroup]="addPatientLocationForm" (ngSubmit)="onSubmitPatient()">
+          <div class="row mt-5">
+          </div>
+          <div class="row mb-2">
+            <div class="col-3">
+              <label for="">Tên bệnh nhân</label><br>
+            </div>
+            <div class="col-7">
+              <select name="patientName" id="patientName" formControlName="patientName" type="text" class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && v.patientName.errors }">
+                <option selected="selected">Chọn bệnh nhân</option>
+                <option *ngFor="let item of currentPatientLocations" value="{{item.id}}">{{item.patientName}} ~ {{item.added}}</option>
+              </select>
+              <div *ngIf="submitted && v.patientName.errors" class="invalid-feedback">
+                <div>Nhập tên bệnh nhân</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-3">
+              <label for="">Ngày xác nhận</label><br>
+            </div>
+            <div class="col-7">
+              <input name="verifyDate" id="verifyDate" formControlName="verifyDate" type="date" class="mb-2 form-control"
+                     [ngClass]="{ 'is-invalid': submitted}">
+              <div *ngIf="submitted" class="invalid-feedback">
+                <div>Nhập ngày mắc bệnh</div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-3">
+              <label for="">Ghi chú</label><br>
+            </div>
+            <div class="col-7">
+              <textarea name="" placeholder="Ghi chú" id="" rows="4" style="width: 100%; outline: none; padding: 7px"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+
     <div class="page-title-actions mb-3 text-right">
       <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)="open(content)">
         <fa class="mr-2" name="plus"></fa>
@@ -92,9 +154,7 @@
           <tbody>
           <tr *ngFor="let item of datas | paginate: { itemsPerPage: 20, currentPage: p }; let i = index" >
             <td>
-              <button type="button" class="mt-1 btn btn-primary">
-                <a routerLink="/admin/location/add-patient" style="color: #ffffff">Thêm</a>
-              </button>
+              <button type="button" class="mt-1 btn btn-primary" (click)="open(patientLocation); onClickShowModal(item.id);">Bệnh nhân</button>
             </td>
             <td style="vertical-align: inherit">{{item.name}}</td>
             <td style="vertical-align: inherit">{{item.lat}}</td>

@@ -22,14 +22,14 @@ export class AddPatientComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private addPatientService: AddPatientService) { }
 
   ngOnInit() {
-    this.getAll();
+    this.getPatientToLocation();
 
     this.addPatientLocationForm = this.formBuilder.group({
       name: ['', Validators.required],
       verifyDate: ['', [Validators.required]]
     });
   }
-  getAll() {
+  getPatientToLocation() {
     this.addPatientService.getAll().subscribe(
       (res: any) => {
         this.patientData = res;
@@ -49,10 +49,17 @@ export class AddPatientComponent implements OnInit {
     if (this.addPatientLocationForm.invalid) {
       return;
     }
-  }
-  back() {
-    this.name = '';
-    this.verifyDate = '';
-    this.note = '';
+    const patientName = this.f.name.value;
+    const verifyDate = this.f.verifyDate.value;
+    this.addPatientService.addPatientToLocation({patientName, verifyDate}).subscribe(
+      res => {
+        alert('Thêm bệnh nhân thành công.');
+        this.getPatientToLocation();
+      },
+      error => {
+        alert('Thêm thất bại!');
+        console.log(error.message);
+      }
+    );
   }
 }
