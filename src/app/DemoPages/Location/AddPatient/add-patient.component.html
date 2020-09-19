@@ -36,9 +36,10 @@
             <div class="col-7">
               <select name="name" id="name" formControlName="name" type="text" class="form-control"
                      [ngClass]="{'is-invalid': submitted && f.name.errors}">
-                <option value="1">khanh</option>
-                <option value="2">duy</option>
-                <option value="3">pham</option>
+                <option selected="selected">Chọn bệnh nhân</option>
+                <option *ngFor="let patient of patientData">
+                  <p>{{patient.patientName}}</p>
+                </option>
               </select>
               <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                 <div *ngIf="f.name.errors.required">Nhập tên bệnh nhân</div>

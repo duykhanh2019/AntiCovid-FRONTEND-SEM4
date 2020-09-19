@@ -3,4 +3,5 @@ export class PatientModel {
     patientName: string;
     note: string;
     createdAt: string;
+    added: string;
 }
