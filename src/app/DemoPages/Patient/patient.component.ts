@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {PatientModel} from '../Model/patient.model';
 import {PatientService} from './patient.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -32,24 +32,43 @@ export class PatientComponent implements OnInit {
   ngOnInit(): void {
     this.getAll();
 
-    this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      lat: ['', Validators.required],
-      lng: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      patientGroup: ['', [Validators.required]],
-      note: ['', [Validators.required]],
-      verifyDate: ['', [Validators.required]]
+    // this.registerForm = this.formBuilder.group({
+    //   patientName: ['', Validators.required],
+    //   gender: ['', Validators.required],
+    //   age: ['', [Validators.required]],
+    //   province: ['', [Validators.required]],
+    //   status: ['', [Validators.required]],
+    //   notePatient: ['', ['']],
+    //   verifyDate: ['', [Validators.required]]
+    // });
+
+    this.registerForm = new FormGroup({
+      patientName: new FormControl(),
+      gender: new FormControl(),
+      age: new FormControl(),
+      province: new FormControl(),
+      status: new FormControl(),
+      notePatient: new FormControl(),
+      verifyDate: new FormControl(),
     });
-    this.updateForm = this.formBuilder.group({
-      updateName: ['', Validators.required],
-      updateLat: ['', Validators.required],
-      updateLng: ['', [Validators.required]],
-      updateAddress: ['', [Validators.required]],
-      updatePatientGroup: ['', [Validators.required]],
-      updateNote: ['', [Validators.required]],
-      updateVerifyDate: ['', [Validators.required]]
+    this.updateForm = new FormGroup({
+      patientName: new FormControl(),
+      gender: new FormControl(),
+      age: new FormControl(),
+      province: new FormControl(),
+      status: new FormControl(),
+      notePatient: new FormControl(),
+      verifyDate: new FormControl(),
     });
+    // this.updateForm = this.formBuilder.group({
+    //   updateName: ['', Validators.required],
+    //   updateLat: ['', Validators.required],
+    //   updateLng: ['', [Validators.required]],
+    //   updateAddress: ['', [Validators.required]],
+    //   updatePatientGroup: ['', [Validators.required]],
+    //   updateNote: ['', [Validators.required]],
+    //   updateVerifyDate: ['', [Validators.required]]
+    // });
   }
   Search() {
     if (this.patientName !== '') {
@@ -78,6 +97,7 @@ export class PatientComponent implements OnInit {
   }
 
   get f() { return this.registerForm.controls; }
+  get checkUpdateForm() { return this.updateForm.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -85,9 +105,14 @@ export class PatientComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    const patientName = this.f.name.value;
-    const note = this.f.note.value;
-    this.patientService.addPatient({patientName, note}).subscribe(
+    const patientName = this.f.patientName.value;
+    const notePatient = this.f.notePatient.value;
+    const province = this.f.province.value;
+    const age = this.f.age.value;
+    const status = this.f.status.value;
+    const verifyDate = this.f.verifyDate.value;
+    const gender = this.f.gender.value;
+    this.patientService.addPatient({province, age, status, verifyDate, gender, patientName, notePatient}).subscribe(
         res => {
           alert('Thêm bệnh nhân thành công.');
           this.getAll();

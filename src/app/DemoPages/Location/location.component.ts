@@ -107,8 +107,11 @@ export class LocationComponent implements OnInit {
           this.currentHospital = this.datas.filter(hospital => hospital.id === this.locationId);
           this.currentHospital[0].patient.forEach(patient => {
             this.currentPatientLocations.forEach(current => {
+              if (!patient || !current) {
+                return;
+              }
               if (patient.id === current.id) {
-                current.added = 'da them';
+                current.added = 'Đã thêm';
               }
             });
           });
@@ -198,6 +201,9 @@ export class LocationComponent implements OnInit {
       this.currentPatientLocations = this.patientLocations;
       this.currentHospital[0].patient.forEach(patient => {
         this.currentPatientLocations.forEach(current => {
+          if (!patient || !current) {
+            return;
+          }
           if (patient.id === current.id) {
             current.added = '(Đã thêm)';
           }
