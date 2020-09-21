@@ -6,7 +6,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form name="form" [formGroup]="registerForm">
+    <form name="form" [formGroup]="editUserForm"  (ngSubmit)="onSubmit()">
       <div class="position-relative form-group">
         <label for="userName">Họ và Tên</label>
         <input name="userName" id="userName" formControlName="userName" type="text" class="form-control">
@@ -42,7 +42,7 @@
     </form>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
-        <button type="submit" class="btn btn-primary">Sửa</button>
+        <button (click)="onSubmit()" type="submit"  class="btn btn-primary">Sửa</button>
       </div>
   </div>
 </ng-template>
