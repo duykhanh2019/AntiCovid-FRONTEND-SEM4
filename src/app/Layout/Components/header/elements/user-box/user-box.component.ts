@@ -69,7 +69,7 @@ export class UserBoxComponent implements OnInit {
       status: this.item.status,
       password: this.item.password
     };
-    debugger;
+    // debugger;
     this.userBoxService.updateUser(this.id, objUser)
         .pipe(first())
         .subscribe(

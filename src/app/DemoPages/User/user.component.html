@@ -2,7 +2,7 @@
 
 <div class="search-wrapper mb-3" [class.active]="isActive">
 	<div class="input-holder">
-		<input type="text" placeholder="Tìm người dùng" class="search-input">
+		<input type="text" placeholder="Tìm người dùng" class="search-input" [(ngModel)]="email" (input)="Search()">
 		<button class="search-icon" (click)="isActive = true"><span></span></button>
 	</div>
 	<button class="close" (click)="isActive = false"></button>
@@ -24,8 +24,7 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr *ngFor="let item of datas | paginate: { itemsPerPage: 5, currentPage: p }; let i = index" >
-<!--						<th scope="row"></th>-->
+					<tr *ngFor="let item of datas | paginate: { itemsPerPage: 10, currentPage: p }; let i = index" >
 						<td>{{ i + 1 }}</td>
 						<td>{{item.userName}}</td>
 						<td>{{item.phone}}</td>

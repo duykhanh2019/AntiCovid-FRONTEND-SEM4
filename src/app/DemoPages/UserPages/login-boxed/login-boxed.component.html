@@ -1,4 +1,4 @@
-<div class="col-md-6 offset-md-3 mt-5">
+<div class="col-md-6 offset-md-3 mt-5 pt-5">
   <div class="card">
     <h4 class="card-header" style="text-align: center">Đăng Nhập</h4>
     <div class="card-body" >
@@ -7,14 +7,14 @@
           <label for="email">Email</label>
           <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Username is required</div>
+            <div *ngIf="f.email.errors.required">Nhập địa chỉ email</div>
           </div>
         </div>
         <div class="form-group">
           <label for="password">Mật khẩu</label>
           <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.required">Nhập mật khẩu</div>
           </div>
         </div>
         <button [disabled]="loading" class="btn btn-primary">
