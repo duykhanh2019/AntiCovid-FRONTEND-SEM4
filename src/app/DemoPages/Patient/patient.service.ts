@@ -7,8 +7,11 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'Application/json'})
 };
 const apiUrl = 'http://52.165.229.168:8080/api/patients';
-const apiUrlDelete = 'http://52.165.229.168:8080/api/patient/';
-const apiUrlPatient = 'http://52.165.229.168:8080/api/patient/';
+const apiUrlDelete = 'http://52.165.229.168:8080/api/patient';
+const apiAddPatient = 'http://52.165.229.168:8080/api/patient';
+const getApiPatientDetail = 'http://52.165.229.168:8080/api/patient/';
+const getApiUpdatePatient = 'http://52.165.229.168:8080/api/patient/';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +24,16 @@ export class PatientService {
 
   public addPatient(objPatient) {
 
-    return this.httpClient.post<any>('http://52.165.229.168:8080/api/patients', objPatient);
+    return this.httpClient.post<any>(apiAddPatient, objPatient);
   }
 
+  update(rq: any): Observable<any> {
+    return this.httpClient.put(getApiUpdatePatient + rq.id, rq).pipe();
+  }
   Delete(id: number): Observable<any> {
     return this.httpClient.delete(apiUrlDelete + id).pipe();
   }
   getPatient(id: number): Observable<any> {
-    return this.httpClient.get(apiUrlPatient + id).pipe();
+    return this.httpClient.get(getApiPatientDetail + id).pipe();
   }
 }

@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {PatientModel} from '../Model/patient.model';
 import {PatientService} from './patient.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class PatientComponent implements OnInit {
   closeResult: string;
   p = 1;
   datas: PatientModel[] = [];
-  dataPatient: PatientModel[];
+  dataPatient: PatientModel;
   index: number;
   modalReference: any;
   question: any = {};
@@ -32,24 +32,25 @@ export class PatientComponent implements OnInit {
   ngOnInit(): void {
     this.getAll();
 
-    this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      lat: ['', Validators.required],
-      lng: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      patientGroup: ['', [Validators.required]],
-      note: ['', [Validators.required]],
-      verifyDate: ['', [Validators.required]]
+    this.registerForm = new FormGroup({
+      patientName: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      age: new FormControl('', Validators.required),
+      province: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
+      notePatient: new FormControl('', Validators.required),
+      verifyDate: new FormControl('', Validators.required),
     });
-    this.updateForm = this.formBuilder.group({
-      updateName: ['', Validators.required],
-      updateLat: ['', Validators.required],
-      updateLng: ['', [Validators.required]],
-      updateAddress: ['', [Validators.required]],
-      updatePatientGroup: ['', [Validators.required]],
-      updateNote: ['', [Validators.required]],
-      updateVerifyDate: ['', [Validators.required]]
+    this.updateForm = new FormGroup({
+      patientName: new FormControl('', Validators.required),
+      gender: new FormControl('', Validators.required),
+      age: new FormControl('', Validators.required),
+      province: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
+      notePatient: new FormControl('', Validators.required),
+      verifyDate: new FormControl('', Validators.required),
     });
+
   }
   Search() {
     if (this.patientName !== '') {
@@ -62,15 +63,49 @@ export class PatientComponent implements OnInit {
   }
 
   open(content) {
+
     this.modalService.open(content).result.then((result) => {
+      setTimeout(() => {
+        this.registerForm.controls.patientName.setErrors(null);
+        this.registerForm.controls.gender.setErrors(null);
+        this.registerForm.controls.age.setErrors(null);
+        this.registerForm.controls.province.setErrors(null);
+        this.registerForm.controls.status.setErrors(null);
+        this.registerForm.controls.notePatient.setErrors(null);
+        this.registerForm.controls.verifyDate.setErrors(null);
+        this.updateForm.controls.patientName.setErrors(null);
+        this.updateForm.controls.gender.setErrors(null);
+        this.updateForm.controls.age.setErrors(null);
+        this.updateForm.controls.province.setErrors(null);
+        this.updateForm.controls.status.setErrors(null);
+        this.updateForm.controls.notePatient.setErrors(null);
+        this.updateForm.controls.verifyDate.setErrors(null);
+      }, 1000);
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
   openUpdatePatient(patient, id: number) {
+
     this.getPatient(id);
     this.modalService.open(patient).result.then((result) => {
+      setTimeout(() => {
+        this.registerForm.controls.patientName.setErrors(null);
+        this.registerForm.controls.gender.setErrors(null);
+        this.registerForm.controls.age.setErrors(null);
+        this.registerForm.controls.province.setErrors(null);
+        this.registerForm.controls.status.setErrors(null);
+        this.registerForm.controls.notePatient.setErrors(null);
+        this.registerForm.controls.verifyDate.setErrors(null);
+        this.updateForm.controls.patientName.setErrors(null);
+        this.updateForm.controls.gender.setErrors(null);
+        this.updateForm.controls.age.setErrors(null);
+        this.updateForm.controls.province.setErrors(null);
+        this.updateForm.controls.status.setErrors(null);
+        this.updateForm.controls.notePatient.setErrors(null);
+        this.updateForm.controls.verifyDate.setErrors(null);
+      }, 1000);
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -78,6 +113,7 @@ export class PatientComponent implements OnInit {
   }
 
   get f() { return this.registerForm.controls; }
+  get checkUpdateForm() { return this.updateForm.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -85,10 +121,19 @@ export class PatientComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    const patientName = this.f.name.value;
-    const note = this.f.note.value;
-    this.patientService.addPatient({patientName, note}).subscribe(
+    const request = {
+      id: Math.floor(Math.random() * 99999) + 10000,
+      patientName: this.f.patientName.value,
+      notePatient: this.f.notePatient.value,
+      province: this.f.province.value,
+      age: this.f.age.value,
+      status: this.f.status.value,
+      verifyDate: this.f.verifyDate.value,
+      gender: this.f.gender.value
+    };
+    this.patientService.addPatient(request).subscribe(
         res => {
+          console.log(res, 'logres');
           alert('Thêm bệnh nhân thành công.');
           this.getAll();
         },
@@ -98,11 +143,30 @@ export class PatientComponent implements OnInit {
         }
     );
   }
-  onSubmitUpdate() {
+  onSubmitUpdate(id) {
     this.submitted = true;
-    if (this.updateForm.invalid) {
-      return;
-    }
+    console.log(this.dataPatient);
+    const request = {
+      id,
+      patientName: this.updateForm.controls.patientName.value ? this.updateForm.controls.patientName.value : this.dataPatient.patientName,
+      notePatient: this.updateForm.controls.notePatient.value ? this.updateForm.controls.notePatient.value : this.dataPatient.notePatient,
+      province: this.updateForm.controls.province.value ? this.updateForm.controls.province.value : this.dataPatient.province,
+      age: this.updateForm.controls.age.value ? this.updateForm.controls.age.value : this.dataPatient.age,
+      status: this.updateForm.controls.status.value ? this.updateForm.controls.status.value : this.dataPatient.status,
+      verifyDate: this.updateForm.controls.verifyDate.value ? this.updateForm.controls.verifyDate.value : this.dataPatient.verifyDate,
+      gender: this.updateForm.controls.gender.value ? this.updateForm.controls.gender.value : this.dataPatient.gender
+    };
+    this.updateForm.controls.patientName.setErrors(null);
+    this.updateForm.controls.gender.setErrors(null);
+    this.updateForm.controls.age.setErrors(null);
+    this.updateForm.controls.province.setErrors(null);
+    this.updateForm.controls.status.setErrors(null);
+    this.updateForm.controls.notePatient.setErrors(null);
+    this.updateForm.controls.verifyDate.setErrors(null);
+    this.patientService.update(request).subscribe(rs => {
+      alert('Thay đổi thành công');
+      this.getAll();
+    });
   }
   add(buttonvalue) {
     if (buttonvalue === 'with save') {

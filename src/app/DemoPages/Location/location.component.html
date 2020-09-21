@@ -81,9 +81,9 @@
         </button>
       </div>
       <div class="modal-body ml-2">
-        <div class="position-relative form-group" style="height: 300px; overflow: auto">
+        <div class="position-relative form-group" style="height: 170px; overflow: auto">
           <div *ngFor="let patient of currentHospital[0].patient">
-            <p>{{patient.patientName}}</p>
+            <p>{{patient?.patientName}}</p>
           </div>
         </div>
         <hr>
@@ -111,8 +111,8 @@
             </div>
             <div class="col-7">
               <input name="verifyDate" id="verifyDate" formControlName="verifyDate" type="date" class="mb-2 form-control"
-                     [ngClass]="{ 'is-invalid': submitted}">
-              <div *ngIf="submitted" class="invalid-feedback">
+                     [ngClass]="{ 'is-invalid': submitted && v.verifyDate.errors}">
+              <div *ngIf="submitted && v.verifyDate.errors" class="invalid-feedback">
                 <div>Nhập ngày mắc bệnh</div>
               </div>
             </div>
