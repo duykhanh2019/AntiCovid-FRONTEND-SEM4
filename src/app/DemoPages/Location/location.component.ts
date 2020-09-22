@@ -111,7 +111,7 @@ export class LocationComponent implements OnInit {
                 return;
               }
               if (patient.id === current.id) {
-                current.added = 'Đã thêm';
+                current.added = ' ~ Đã thêm';
               }
             });
           });
@@ -205,7 +205,7 @@ export class LocationComponent implements OnInit {
             return;
           }
           if (patient.id === current.id) {
-            current.added = '(Đã thêm)';
+            current.added = ' ~ (Đã thêm)';
           }
         });
       });

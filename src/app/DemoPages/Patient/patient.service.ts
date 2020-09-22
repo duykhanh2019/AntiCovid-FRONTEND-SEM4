@@ -7,7 +7,7 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'Application/json'})
 };
 const apiUrl = 'http://52.165.229.168:8080/api/patients';
-const apiUrlDelete = 'http://52.165.229.168:8080/api/patient';
+const apiUrlDelete = 'http://52.165.229.168:8080/api/patient/';
 const apiAddPatient = 'http://52.165.229.168:8080/api/patient';
 const getApiPatientDetail = 'http://52.165.229.168:8080/api/patient/';
 const getApiUpdatePatient = 'http://52.165.229.168:8080/api/patient/';

@@ -39,7 +39,7 @@ export class PatientComponent implements OnInit {
       province: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
       notePatient: new FormControl('', Validators.required),
-      verifyDate: new FormControl('', Validators.required),
+      verifyDatePatient: new FormControl('', Validators.required),
     });
     this.updateForm = new FormGroup({
       patientName: new FormControl('', Validators.required),
@@ -48,7 +48,7 @@ export class PatientComponent implements OnInit {
       province: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
       notePatient: new FormControl('', Validators.required),
-      verifyDate: new FormControl('', Validators.required),
+      verifyDatePatient: new FormControl('', Validators.required),
     });
 
   }
@@ -72,14 +72,14 @@ export class PatientComponent implements OnInit {
         this.registerForm.controls.province.setErrors(null);
         this.registerForm.controls.status.setErrors(null);
         this.registerForm.controls.notePatient.setErrors(null);
-        this.registerForm.controls.verifyDate.setErrors(null);
+        this.registerForm.controls.verifyDatePatient.setErrors(null);
         this.updateForm.controls.patientName.setErrors(null);
         this.updateForm.controls.gender.setErrors(null);
         this.updateForm.controls.age.setErrors(null);
         this.updateForm.controls.province.setErrors(null);
         this.updateForm.controls.status.setErrors(null);
         this.updateForm.controls.notePatient.setErrors(null);
-        this.updateForm.controls.verifyDate.setErrors(null);
+        this.updateForm.controls.verifyDatePatient.setErrors(null);
       }, 1000);
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -97,14 +97,14 @@ export class PatientComponent implements OnInit {
         this.registerForm.controls.province.setErrors(null);
         this.registerForm.controls.status.setErrors(null);
         this.registerForm.controls.notePatient.setErrors(null);
-        this.registerForm.controls.verifyDate.setErrors(null);
+        this.registerForm.controls.verifyDatePatient.setErrors(null);
         this.updateForm.controls.patientName.setErrors(null);
         this.updateForm.controls.gender.setErrors(null);
         this.updateForm.controls.age.setErrors(null);
         this.updateForm.controls.province.setErrors(null);
         this.updateForm.controls.status.setErrors(null);
         this.updateForm.controls.notePatient.setErrors(null);
-        this.updateForm.controls.verifyDate.setErrors(null);
+        this.updateForm.controls.verifyDatePatient.setErrors(null);
       }, 1000);
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -128,7 +128,7 @@ export class PatientComponent implements OnInit {
       province: this.f.province.value,
       age: this.f.age.value,
       status: this.f.status.value,
-      verifyDate: this.f.verifyDate.value,
+      verifyDatePatient: this.f.verifyDatePatient.value,
       gender: this.f.gender.value
     };
     this.patientService.addPatient(request).subscribe(
@@ -145,7 +145,6 @@ export class PatientComponent implements OnInit {
   }
   onSubmitUpdate(id) {
     this.submitted = true;
-    console.log(this.dataPatient);
     const request = {
       id,
       patientName: this.updateForm.controls.patientName.value ? this.updateForm.controls.patientName.value : this.dataPatient.patientName,
@@ -153,7 +152,7 @@ export class PatientComponent implements OnInit {
       province: this.updateForm.controls.province.value ? this.updateForm.controls.province.value : this.dataPatient.province,
       age: this.updateForm.controls.age.value ? this.updateForm.controls.age.value : this.dataPatient.age,
       status: this.updateForm.controls.status.value ? this.updateForm.controls.status.value : this.dataPatient.status,
-      verifyDate: this.updateForm.controls.verifyDate.value ? this.updateForm.controls.verifyDate.value : this.dataPatient.verifyDate,
+      verifyDatePatient: this.updateForm.controls.verifyDatePatient.value ? this.updateForm.controls.verifyDatePatient.value : this.dataPatient.verifyDatePatient,
       gender: this.updateForm.controls.gender.value ? this.updateForm.controls.gender.value : this.dataPatient.gender
     };
     this.updateForm.controls.patientName.setErrors(null);
@@ -162,7 +161,7 @@ export class PatientComponent implements OnInit {
     this.updateForm.controls.province.setErrors(null);
     this.updateForm.controls.status.setErrors(null);
     this.updateForm.controls.notePatient.setErrors(null);
-    this.updateForm.controls.verifyDate.setErrors(null);
+    this.updateForm.controls.verifyDatePatient.setErrors(null);
     this.patientService.update(request).subscribe(rs => {
       alert('Thay đổi thành công');
       this.getAll();
