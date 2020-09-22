@@ -51,10 +51,10 @@
               <label for="">Ngày xác nhận</label><br>
             </div>
             <div class="col-7">
-              <input name="verifyDate" id="verifyDate" formControlName="verifyDate" type="date" class="mb-2 form-control"
-                     [ngClass]="{ 'is-invalid': submitted && f.verifyDate.errors }">
-              <div *ngIf="submitted && f.verifyDate.errors" class="invalid-feedback">
-                <div *ngIf="f.verifyDate.errors.required">Nhập ngày mắc bệnh</div>
+              <input name="verifyDatePatient" id="verifyDatePatient" formControlName="verifyDatePatient" type="date" class="mb-2 form-control"
+                     [ngClass]="{ 'is-invalid': submitted && f.verifyDatePatient.errors }">
+              <div *ngIf="submitted && f.verifyDatePatient.errors" class="invalid-feedback">
+                <div *ngIf="f.verifyDatePatient.errors.required">Nhập ngày mắc bệnh</div>
               </div>
             </div>
           </div>

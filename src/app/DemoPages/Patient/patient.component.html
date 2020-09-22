@@ -82,11 +82,11 @@
                 </div>
             </div>
 						<div class="position-relative form-group">
-							<label for="verifyDate">Ngày tiếp nhận</label>
-							<input name="verifyDate" id="verifyDate" formControlName="verifyDate" type="date" class="form-control"
-							       [ngClass]="{ 'is-invalid': submitted && f.verifyDate.errors }">
-							<div *ngIf="submitted && f.verifyDate.errors" class="invalid-feedback">
-								<div *ngIf="f.verifyDate.errors.required">Nhập ngày mắc bệnh</div>
+							<label for="verifyDatePatient">Ngày tiếp nhận</label>
+							<input name="verifyDatePatient" id="verifyDatePatient" formControlName="verifyDatePatient" type="date" class="form-control"
+							       [ngClass]="{ 'is-invalid': submitted && f.verifyDatePatient.errors }">
+							<div *ngIf="submitted && f.verifyDatePatient.errors" class="invalid-feedback">
+								<div *ngIf="f.verifyDatePatient.errors.required">Nhập ngày mắc bệnh</div>
 							</div>
 						</div>
 						<div class="position-relative form-group">
@@ -120,7 +120,7 @@
 					<div class="position-relative form-group">
 						<label for="patientName"></label>
 						<input name="patientName" formControlName="patientName" type="text" class="form-control"
-						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.patientName?.errors}" placeholder="BN-00" value="{{dataPatient?.patientName}}">
+						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.patientName?.errors}" readonly value="{{dataPatient?.patientName}}">
 						<div *ngIf="submitted && checkUpdateForm?.patientName?.errors" class="invalid-feedback">
 							<div *ngIf="checkUpdateForm?.updateName?.errors?.required">Nhập tên bệnh nhân</div>
 						</div>
@@ -158,16 +158,16 @@
 						</div>
 					</div>
 					<div class="position-relative form-group">
-						<label for="verifyDate">Ngày mắc bệnh</label>
-						<input name="verifyDate" formControlName="verifyDate" type="date" class="form-control" value="{{dataPatient?.verifyDate}}"
-						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.verifyDate?.errors }">
-						<div *ngIf="submitted && checkUpdateForm?.verifyDate?.errors" class="invalid-feedback">
-							<div *ngIf="checkUpdateForm?.verifyDate?.errors?.required">Nhập ngày mắc bệnh</div>
+						<label for="verifyDatePatient">Ngày mắc bệnh</label>
+						<input name="verifyDatePatient" formControlName="verifyDatePatient" type="date" class="form-control" value="{{dataPatient?.verifyDatePatient}}"
+						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.verifyDatePatient?.errors }">
+						<div *ngIf="submitted && checkUpdateForm?.verifyDatePatient?.errors" class="invalid-feedback">
+							<div *ngIf="checkUpdateForm?.verifyDatePatient?.errors?.required">Nhập ngày mắc bệnh</div>
 						</div>
 					</div>
 					<div class="position-relative form-group">
-						<label for="verifyDate">Ghi chú</label>
-						<input name="verifyDate" formControlName="notePatient" type="text" class="form-control" value="{{dataPatient?.notePatient}}">
+						<label for="verifyDatePatient">Ghi chú</label>
+						<input name="verifyDatePatient" formControlName="notePatient" type="text" class="form-control" value="{{dataPatient?.notePatient}}">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
@@ -186,7 +186,7 @@
 						<th class="title">Tuổi</th>
 						<th class="title">Tỉnh/TP</th>
 						<th class="title">Tình trạng</th>
-						<th class="title">Ngày mắc bệnh</th>
+						<th class="title" style="min-width: 130px">Ngày mắc bệnh</th>
 						<th class="title-note">Ghi chú</th>
 						<th class="title">Tác vụ</th>
 					</tr>
@@ -198,11 +198,11 @@
 						<td>{{item.age}}</td>
 						<td>{{item.province}}</td>
 						<td>{{item.status}}</td>
-						<td class="text-left">{{item.verifyDate}}</td>
+						<td class="text-left">{{item.verifyDatePatient}}</td>
 						<td class="text-note">{{item.notePatient}}</td>
 						<td>
               <i class="vsm-icon pe-7s-config mr-2 ico-edit" (click)="openUpdatePatient(patient, item.id)"></i>
-              <i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)"></i>
+<!--              <i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)"></i>-->
 	          </td>
 					</tr>
 					</tbody>

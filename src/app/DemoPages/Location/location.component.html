@@ -98,7 +98,7 @@
               <select name="patientName" id="patientName" formControlName="patientName" type="text" class="form-control"
                       [ngClass]="{ 'is-invalid': submitted && v.patientName.errors }">
                 <option selected="selected">Chọn bệnh nhân</option>
-                <option *ngFor="let item of currentPatientLocations" value="{{item.id}}">{{item.patientName}} ~ {{item.added}}</option>
+                <option *ngFor="let item of currentPatientLocations" value="{{item.id}}">{{item.patientName}} {{item.added}}</option>
               </select>
               <div *ngIf="submitted && v.patientName.errors" class="invalid-feedback">
                 <div>Nhập tên bệnh nhân</div>
@@ -159,7 +159,7 @@
             <td style="vertical-align: inherit">{{item.name}}</td>
             <td style="vertical-align: inherit">{{item.lat}}</td>
             <td style="vertical-align: inherit">{{item.lng}}</td>
-            <td style="vertical-align: inherit"><i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)" style="cursor: pointer;font-size: 20px;color: red;"></i></td>
+<!--            <td style="vertical-align: inherit"><i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)" style="cursor: pointer;font-size: 20px;color: red;"></i></td>-->
           </tr>
           </tbody>
         </table>

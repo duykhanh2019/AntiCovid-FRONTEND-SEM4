@@ -16,7 +16,7 @@ export class AddPatientComponent implements OnInit {
   submitted = false;
   patientData: PatientModel[] = [];
   public name;
-  public verifyDate;
+  public verifyDatePatient;
   public note;
 
   constructor(private formBuilder: FormBuilder, private addPatientService: AddPatientService) { }
@@ -26,7 +26,7 @@ export class AddPatientComponent implements OnInit {
 
     this.addPatientLocationForm = this.formBuilder.group({
       name: ['', Validators.required],
-      verifyDate: ['', [Validators.required]]
+      verifyDatePatient: ['', [Validators.required]]
     });
   }
   getPatientToLocation() {
@@ -50,8 +50,8 @@ export class AddPatientComponent implements OnInit {
       return;
     }
     const patientName = this.f.name.value;
-    const verifyDate = this.f.verifyDate.value;
-    this.addPatientService.addPatientToLocation({patientName, verifyDate}).subscribe(
+    const verifyDatePatient = this.f.verifyDatePatient.value;
+    this.addPatientService.addPatientToLocation({patientName, verifyDatePatient}).subscribe(
       res => {
         alert('Thêm bệnh nhân thành công.');
         this.getPatientToLocation();
