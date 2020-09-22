@@ -8,7 +8,7 @@ import {LoginBoxedService} from './login-boxed.service';
 @Component({
   selector: 'app-login-boxed',
   templateUrl: './login-boxed.component.html',
-  styles: []
+  styleUrls: ['./login-boxed.component.css']
 })
 export class LoginBoxedComponent implements OnInit {
 
