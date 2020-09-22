@@ -1,8 +1,8 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {PatientModel} from '../Model/patient.model';
 import {PatientService} from './patient.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 
 
 @Component({
@@ -25,8 +25,10 @@ export class PatientComponent implements OnInit {
   patientName: string;
   public isActive: any;
   values = '';
+  existId = false;
 
   @Output() closeModalEvent = new EventEmitter<boolean>();
+  @ViewChild('formDirective') private formDirective: NgForm;
   // tslint:disable-next-line:max-line-length
   constructor(private patientService: PatientService, private modalService: NgbModal, private formBuilder: FormBuilder) { }
   ngOnInit(): void {
@@ -61,51 +63,20 @@ export class PatientComponent implements OnInit {
       this.ngOnInit();
     }
   }
-
   open(content) {
-
+    this.registerForm.reset();
+    this.submitted = false;
+    this.existId = false;
     this.modalService.open(content).result.then((result) => {
-      setTimeout(() => {
-        this.registerForm.controls.patientName.setErrors(null);
-        this.registerForm.controls.gender.setErrors(null);
-        this.registerForm.controls.age.setErrors(null);
-        this.registerForm.controls.province.setErrors(null);
-        this.registerForm.controls.status.setErrors(null);
-        this.registerForm.controls.notePatient.setErrors(null);
-        this.registerForm.controls.verifyDatePatient.setErrors(null);
-        this.updateForm.controls.patientName.setErrors(null);
-        this.updateForm.controls.gender.setErrors(null);
-        this.updateForm.controls.age.setErrors(null);
-        this.updateForm.controls.province.setErrors(null);
-        this.updateForm.controls.status.setErrors(null);
-        this.updateForm.controls.notePatient.setErrors(null);
-        this.updateForm.controls.verifyDatePatient.setErrors(null);
-      }, 1000);
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
   openUpdatePatient(patient, id: number) {
-
+    this.submitted = false;
     this.getPatient(id);
     this.modalService.open(patient).result.then((result) => {
-      setTimeout(() => {
-        this.registerForm.controls.patientName.setErrors(null);
-        this.registerForm.controls.gender.setErrors(null);
-        this.registerForm.controls.age.setErrors(null);
-        this.registerForm.controls.province.setErrors(null);
-        this.registerForm.controls.status.setErrors(null);
-        this.registerForm.controls.notePatient.setErrors(null);
-        this.registerForm.controls.verifyDatePatient.setErrors(null);
-        this.updateForm.controls.patientName.setErrors(null);
-        this.updateForm.controls.gender.setErrors(null);
-        this.updateForm.controls.age.setErrors(null);
-        this.updateForm.controls.province.setErrors(null);
-        this.updateForm.controls.status.setErrors(null);
-        this.updateForm.controls.notePatient.setErrors(null);
-        this.updateForm.controls.verifyDatePatient.setErrors(null);
-      }, 1000);
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -133,13 +104,16 @@ export class PatientComponent implements OnInit {
     };
     this.patientService.addPatient(request).subscribe(
         res => {
-          console.log(res, 'logres');
-          alert('Thêm bệnh nhân thành công.');
+          setTimeout(() => {
+            alert('Thêm bệnh nhân thành công.');
+          }, 800);
           this.getAll();
+          const btnRegister: HTMLElement = document.getElementById('btnCloseRegister');
+          btnRegister.click();
         },
         error => {
-          alert('Thêm thất bại!');
-          console.log(error.message);
+          this.existId = true;
+          console.log(this.existId);
         }
     );
   }
@@ -152,19 +126,17 @@ export class PatientComponent implements OnInit {
       province: this.updateForm.controls.province.value ? this.updateForm.controls.province.value : this.dataPatient.province,
       age: this.updateForm.controls.age.value ? this.updateForm.controls.age.value : this.dataPatient.age,
       status: this.updateForm.controls.status.value ? this.updateForm.controls.status.value : this.dataPatient.status,
+      // tslint:disable-next-line:max-line-length
       verifyDatePatient: this.updateForm.controls.verifyDatePatient.value ? this.updateForm.controls.verifyDatePatient.value : this.dataPatient.verifyDatePatient,
       gender: this.updateForm.controls.gender.value ? this.updateForm.controls.gender.value : this.dataPatient.gender
     };
-    this.updateForm.controls.patientName.setErrors(null);
-    this.updateForm.controls.gender.setErrors(null);
-    this.updateForm.controls.age.setErrors(null);
-    this.updateForm.controls.province.setErrors(null);
-    this.updateForm.controls.status.setErrors(null);
-    this.updateForm.controls.notePatient.setErrors(null);
-    this.updateForm.controls.verifyDatePatient.setErrors(null);
     this.patientService.update(request).subscribe(rs => {
-      alert('Thay đổi thành công');
+      setTimeout(() => {
+        alert('Thay đổi thành công');
+      }, 800);
       this.getAll();
+      const btn: HTMLElement = document.getElementById('btnCloseUpdate');
+      btn.click();
     });
   }
   add(buttonvalue) {
@@ -192,8 +164,15 @@ export class PatientComponent implements OnInit {
     this.patientService.getPatient(id).subscribe(
       (res: any) => {
         this.dataPatient = res;
-        this.updateForm.patchValue({
-          updateName: this.question.updateName,
+        console.log(this.dataPatient.verifyDatePatient);
+        this.updateForm.setValue({
+          patientName: this.dataPatient.patientName,
+          age: this.dataPatient.age,
+          gender: this.dataPatient.gender,
+          province: this.dataPatient.province,
+          status: this.dataPatient.status,
+          verifyDatePatient: this.dataPatient.verifyDatePatient.slice(0, 10),
+          notePatient: this.dataPatient.notePatient
         });
       }
     );
@@ -207,6 +186,14 @@ export class PatientComponent implements OnInit {
         this.getAll();
       });
     }
+  }
+  resetForm(form: FormGroup) {
+    form.reset();
+    form.markAsPristine();
+    form.markAsUntouched();
+    Object.keys(form.controls).forEach(key => {
+      form.get(key).setErrors(null) ;
+    });
   }
 
 }
