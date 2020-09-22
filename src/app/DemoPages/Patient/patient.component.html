@@ -44,10 +44,14 @@
 					<div class="position-relative form-group">
 						<label for="patientName">Họ và tên</label>
 						<input name="patientName" id="patientName" formControlName="patientName" type="text" class="form-control"
-							   [ngClass]="{ 'is-invalid': submitted && f.patientName.errors}" placeholder="BN-00">
+							   [ngClass]="{ 'is-invalid': submitted && f.patientName.errors}" placeholder="BN-00" [class.redBoder]="existId" (input)="existId = false" >
 						<div *ngIf="submitted && f.patientName.errors" class="invalid-feedback">
 							<div *ngIf="f.patientName.errors.required">Nhập tên bệnh nhân</div>
 						</div>
+						<div *ngIf="existId" style="color: #C71C22; font-size: 12px;">
+							<div>Bệnh nhân đã tồn tại</div>
+						</div>
+
 					</div>
             <div class="position-relative form-group">
                 <label for="gender">Giới tính</label>
@@ -94,7 +98,7 @@
               <textarea name="notePatient" id="notePatient" formControlName="notePatient" type="text" class="form-control"></textarea>
             </div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
+						<button id="btnCloseRegister" type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
 						<button type="submit" class="btn btn-primary">Thêm</button>
 					</div>
 				</form>
@@ -118,16 +122,12 @@
 			<div class="modal-body">
 				<form name="form" [formGroup]="updateForm" (ngSubmit)="onSubmitUpdate(dataPatient.id)">
 					<div class="position-relative form-group">
-						<label for="patientName"></label>
-						<input name="patientName" formControlName="patientName" type="text" class="form-control"
-						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.patientName?.errors}" readonly value="{{dataPatient?.patientName}}">
-						<div *ngIf="submitted && checkUpdateForm?.patientName?.errors" class="invalid-feedback">
-							<div *ngIf="checkUpdateForm?.updateName?.errors?.required">Nhập tên bệnh nhân</div>
-						</div>
+						<label></label>
+						<input formControlName="patientName" type="text" class="form-control" readonly>
 					</div>
 					<div class="position-relative form-group">
 						<label for="gender">Giới tính</label>
-						<input name="gender" formControlName="gender" type="text" class="form-control" value="{{dataPatient?.gender}}"
+						<input name="gender" formControlName="gender" type="text" class="form-control"
 						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.gender?.errors }">
 						<div *ngIf="submitted && checkUpdateForm?.gender?.errors" class="invalid-feedback">
 							<div *ngIf="checkUpdateForm?.gender?.errors?.required">Nhập giới tính</div>
@@ -135,7 +135,7 @@
 					</div>
 					<div class="position-relative form-group">
 						<label for="age">Tuổi</label>
-						<input name="age" formControlName="age" type="text" class="form-control" value="{{dataPatient?.age}}"
+						<input name="age" formControlName="age" type="text" class="form-control"
 						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.age?.errors }">
 						<div *ngIf="submitted && checkUpdateForm?.age?.errors" class="invalid-feedback">
 							<div *ngIf="checkUpdateForm?.age?.errors?.required">Nhập tuổi</div>
@@ -143,7 +143,7 @@
 					</div>
 					<div class="position-relative form-group">
 						<label for="province">Tỉnh/TP</label>
-						<input formControlName="province" type="text" class="form-control" value="{{dataPatient?.province}}"
+						<input formControlName="province" type="text" class="form-control"
 						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.province?.errors }">
 						<div *ngIf="submitted && checkUpdateForm?.province?.errors" class="invalid-feedback">
 							<div *ngIf="checkUpdateForm?.province?.errors?.required">Nhập địa điểm</div>
@@ -151,7 +151,7 @@
 					</div>
 					<div class="position-relative form-group">
 						<label for="status">Trình trạng</label>
-						<input name="status" id="updatePatientGroup" formControlName="status" type="text" class="form-control" value="{{dataPatient?.status}}"
+						<input name="status" id="updatePatientGroup" formControlName="status" type="text" class="form-control"
 						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.updatePatientGroup?.errors }">
 						<div *ngIf="submitted && checkUpdateForm?.status?.errors" class="invalid-feedback">
 							<div *ngIf="checkUpdateForm?.status?.errors?.required">Nhập tình trạng bệnh nhân</div>
@@ -159,7 +159,7 @@
 					</div>
 					<div class="position-relative form-group">
 						<label for="verifyDatePatient">Ngày mắc bệnh</label>
-						<input name="verifyDatePatient" formControlName="verifyDatePatient" type="date" class="form-control" value="{{dataPatient?.verifyDatePatient}}"
+						<input name="verifyDatePatient" formControlName="verifyDatePatient" type="date" class="form-control"
 						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.verifyDatePatient?.errors }">
 						<div *ngIf="submitted && checkUpdateForm?.verifyDatePatient?.errors" class="invalid-feedback">
 							<div *ngIf="checkUpdateForm?.verifyDatePatient?.errors?.required">Nhập ngày mắc bệnh</div>
@@ -167,10 +167,10 @@
 					</div>
 					<div class="position-relative form-group">
 						<label for="verifyDatePatient">Ghi chú</label>
-						<input name="verifyDatePatient" formControlName="notePatient" type="text" class="form-control" value="{{dataPatient?.notePatient}}">
+						<input name="verifyDatePatient" formControlName="notePatient" type="text" class="form-control">
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
+						<button id="btnCloseUpdate" type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
 						<button type="submit" class="btn btn-primary">Lưu</button>
 					</div>
 				</form>
