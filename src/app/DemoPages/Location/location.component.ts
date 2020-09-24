@@ -38,6 +38,7 @@ export class LocationComponent implements OnInit {
 
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
+      province: ['', Validators.required],
       lat: ['', Validators.required],
       lng: ['', [Validators.required]],
     });
@@ -72,10 +73,11 @@ export class LocationComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
+    const province = this.f.province.value;
     const name = this.f.name.value;
     const lat = this.f.lat.value;
     const lng = this.f.lng.value;
-    this.locationService.addLocation({name, lat, lng}).subscribe(
+    this.locationService.addLocation({province, name, lat, lng}).subscribe(
         res => {
           this.modalReference.close();
           alert('Thêm địa điểm thành công.');

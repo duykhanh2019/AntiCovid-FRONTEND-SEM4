@@ -41,7 +41,15 @@
       <div class="modal-body">
         <form name="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <div class="position-relative form-group">
-            <label for="name">Địa điểm</label>
+            <label for="province">Tỉnh/Tp</label>
+            <input name="province" id="province" formControlName="province" type="text" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.province.errors}">
+            <div *ngIf="submitted && f.province.errors" class="invalid-feedback">
+              <div *ngIf="f.province.errors.required">Nhập tỉnh/tp</div>
+            </div>
+          </div>
+          <div class="position-relative form-group">
+            <label for="name">Địa chỉ</label>
             <input name="name" id="name" formControlName="name" type="text" class="form-control"
                    [ngClass]="{ 'is-invalid': submitted && f.name.errors}">
             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
