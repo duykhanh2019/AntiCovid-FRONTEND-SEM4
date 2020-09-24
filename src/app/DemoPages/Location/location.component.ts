@@ -29,6 +29,7 @@ export class LocationComponent implements OnInit {
   patientLocations: PatientModel[] = [];
   currentPatientLocations: PatientModel[] = [];
   index: number;
+  existId = false;
 
   @ViewChild('btnClose') btnClose: ElementRef;
   @Output() closeModalEvent = new EventEmitter<boolean>();
@@ -57,6 +58,7 @@ export class LocationComponent implements OnInit {
   }
   open(content) {
     this.registerForm.reset();
+    this.existId = false;
     this.modalReference = this.modalService.open(content);
     this.modalReference.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -173,8 +175,7 @@ export class LocationComponent implements OnInit {
         });
       },
       error => {
-        alert('Thêm thất bại!');
-        console.log(error.message);
+        this.existId = true;
       }
     );
   }
