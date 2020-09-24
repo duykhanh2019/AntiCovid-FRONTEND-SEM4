@@ -141,6 +141,56 @@
       </div>
     </ng-template>
 
+<!--    form update location-->
+    <ng-template #location let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title">Sửa thông tin khu vực dịch bệnh</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="form" [formGroup]="updateForm" (ngSubmit)="onSubmitUpdate(dataLocation.id)">
+          <div class="position-relative form-group">
+            <label for="province">Tỉnh/TP</label>
+            <input name="province" formControlName="province" type="text" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.province?.errors }">
+            <div *ngIf="submitted && checkUpdateForm?.province?.errors" class="invalid-feedback">
+              <div *ngIf="checkUpdateForm?.province?.errors?.required">Nhập tỉnh/tp</div>
+            </div>
+          </div>
+          <div class="position-relative form-group">
+            <label for="name">Địa chỉ</label>
+            <input name="name" formControlName="name" type="text" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.name?.errors }">
+            <div *ngIf="submitted && checkUpdateForm?.name?.errors" class="invalid-feedback">
+              <div *ngIf="checkUpdateForm?.name?.errors?.required">Nhập địa chỉ </div>
+            </div>
+          </div>
+          <div class="position-relative form-group">
+            <label for="lat">Kinh độ</label>
+            <input formControlName="lat" type="text" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.lat?.errors }">
+            <div *ngIf="submitted && checkUpdateForm?.lat?.errors" class="invalid-feedback">
+              <div *ngIf="checkUpdateForm?.lat?.errors?.required">Nhập kinh độ</div>
+            </div>
+          </div>
+          <div class="position-relative form-group">
+            <label for="lng">Vĩ độ</label>
+            <input formControlName="lng" type="text" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.lng?.errors }">
+            <div *ngIf="submitted && checkUpdateForm?.lng?.errors" class="invalid-feedback">
+              <div *ngIf="checkUpdateForm?.lng?.errors?.required">Nhập vĩ độ</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="btnCloseUpdate" type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
+            <button type="submit" class="btn btn-primary">Lưu</button>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+
     <div class="page-title-actions mb-3 text-right">
       <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)="open(content)">
         <fa class="mr-2" name="plus"></fa>
@@ -167,12 +217,13 @@
             <td style="vertical-align: inherit">{{item.name}}</td>
             <td style="vertical-align: inherit">{{item.lat}}</td>
             <td style="vertical-align: inherit">{{item.lng}}</td>
-<!--            <td style="vertical-align: inherit"><i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)" style="cursor: pointer;font-size: 20px;color: red;"></i></td>-->
+
+            <td><i class="vsm-icon pe-7s-config mr-2 ico-edit" style="cursor: pointer;font-size: 20px;" (click)="openUpdateLocation(location, item.id)"></i></td>
           </tr>
           </tbody>
         </table>
-        <p *ngIf="datas.length == 0" style="text-align: center;margin-top: 20px;font-size: large;"> Chưa có địa điểm nào cần lưu ý ! </p>
       </div>
+      <p *ngIf="datas.length == 0" style="text-align: center;margin-top: 20px;font-size: large;"> Chưa có địa điểm nào cần lưu ý ! </p>
     </div>
   </div>
 </div>

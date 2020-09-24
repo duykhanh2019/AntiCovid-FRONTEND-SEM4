@@ -20,7 +20,6 @@
 		background-image: none;
 	}
 </style>
-
 <div class="search-wrapper" [class.active]="isActive">
 	<div class="input-holder">
 		<input type="text" placeholder="Tìm tên bệnh nhân" class="search-input" [(ngModel)]="patientName" (input)="Search()">
@@ -200,15 +199,12 @@
 						<td>{{item.status}}</td>
 						<td class="text-left">{{item.verifyDatePatient}}</td>
 						<td class="text-note">{{item.notePatient}}</td>
-						<td>
-              <i class="vsm-icon pe-7s-config mr-2 ico-edit" (click)="openUpdatePatient(patient, item.id)"></i>
-<!--              <i class="vsm-icon pe-7s-trash ico-trash" (click)="Delete(item.id)"></i>-->
-	          </td>
+						<td><i class="vsm-icon pe-7s-config mr-2 ico-edit" (click)="openUpdatePatient(patient, item.id)"></i></td>
 					</tr>
 					</tbody>
-					<td *ngIf="datas.length == 0" class="no-data text-center mt-3 w-100" > Không có bệnh nhân nào ! </td>
 				</table>
 			</div>
+			<td *ngIf="datas.length == 0" class="no-data text-center mt-3 w-100" > Không có bệnh nhân nào ! </td>
 		</div>
 	</div>
 </div>

@@ -36,5 +36,11 @@ export class LocationService {
   public addLocation(objLocation) {
     return this.httpClient.post<any>('http://52.165.229.168:8080/api/location' , objLocation);
   }
+  update(rq: any): Observable<any> {
+    return this.httpClient.put('http://52.165.229.168:8080/api/location/' + rq.id, rq).pipe();
+  }
+  getLocation(id: number): Observable<any> {
+    return this.httpClient.get('http://52.165.229.168:8080/api/location/' + id).pipe();
+  }
 }
 
