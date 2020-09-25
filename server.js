@@ -1,16 +1,14 @@
 // Cài đặt máy chủ express
-const express = demand ('express');
-const path = request ('path');
-
-const app = express ();
+const express = require('express');
+const path = require('path');
+const PORT = process.env.PORT || 5000;
+const app = express();
+const app_path = './AntiCovid-FRONTEND-SEM4/src/';
 
 // Chỉ cung cấp các tệp tĩnh trong thư mục dist
-app.use (express.static (__dirname + '/dist/AntiCovid-FRONTEND-SEM4'));
+app.use('/', express.static(path.join(__dirname, app_path)));
 
-app.get ('/*', function (req, res) {
-
-    res.sendFile (path.join (__dirname + '/dist/AntiCovid-FRONTEND-SEM4/src/index.html'));
-});
+app.get('*', (req, res) => res.sendFile(path.join(__dirname, app_path, + 'index.html')));
 
 // Khởi động ứng dụng bằng cách nghe trên cổng Heroku mặc định
-app.listen (process.env.PORT || 8080);
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
