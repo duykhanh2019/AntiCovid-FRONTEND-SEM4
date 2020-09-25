@@ -43,7 +43,7 @@ export class PatientComponent implements OnInit {
       province: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
       notePatient: new FormControl('', Validators.required),
-      verifyDatePatient: new FormControl('', Validators.required),
+      verifyDate: new FormControl('', Validators.required),
     });
     this.updateForm = new FormGroup({
       patientName: new FormControl('', Validators.required),
@@ -52,7 +52,7 @@ export class PatientComponent implements OnInit {
       province: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
       notePatient: new FormControl('', Validators.required),
-      verifyDatePatient: new FormControl('', Validators.required),
+      verifyDate: new FormControl('', Validators.required),
     });
 
   }
@@ -101,7 +101,7 @@ export class PatientComponent implements OnInit {
       province: this.f.province.value,
       age: this.f.age.value,
       status: this.f.status.value,
-      verifyDatePatient: this.f.verifyDatePatient.value,
+      verifyDate: this.f.verifyDate.value,
       gender: this.f.gender.value
     };
     this.patientService.addPatient(request).subscribe(
@@ -121,6 +121,9 @@ export class PatientComponent implements OnInit {
   }
   onSubmitUpdate(id) {
     this.submitted = true;
+    // if (this.updateForm.invalid) {
+    //   return;
+    // }
     const request = {
       id,
       patientName: this.updateForm.controls.patientName.value ? this.updateForm.controls.patientName.value : this.dataPatient.patientName,
@@ -129,7 +132,7 @@ export class PatientComponent implements OnInit {
       age: this.updateForm.controls.age.value ? this.updateForm.controls.age.value : this.dataPatient.age,
       status: this.updateForm.controls.status.value ? this.updateForm.controls.status.value : this.dataPatient.status,
       // tslint:disable-next-line:max-line-length
-      verifyDatePatient: this.updateForm.controls.verifyDatePatient.value ? this.updateForm.controls.verifyDatePatient.value : this.dataPatient.verifyDatePatient,
+      verifyDate: this.updateForm.controls.verifyDate.value ? this.updateForm.controls.verifyDate.value : this.dataPatient.verifyDate,
       gender: this.updateForm.controls.gender.value ? this.updateForm.controls.gender.value : this.dataPatient.gender
     };
     this.patientService.update(request).subscribe(rs => {
@@ -166,14 +169,14 @@ export class PatientComponent implements OnInit {
     this.patientService.getPatient(id).subscribe(
       (res: any) => {
         this.dataPatient = res;
-        console.log(this.dataPatient.verifyDatePatient);
+        console.log(this.dataPatient.verifyDate);
         this.updateForm.setValue({
           patientName: this.dataPatient.patientName,
           age: this.dataPatient.age,
           gender: this.dataPatient.gender,
           province: this.dataPatient.province,
           status: this.dataPatient.status,
-          verifyDatePatient: this.dataPatient.verifyDatePatient.slice(0, 10),
+          verifyDate: this.dataPatient.verifyDate.slice(0, 10),
           notePatient: this.dataPatient.notePatient
         });
       }

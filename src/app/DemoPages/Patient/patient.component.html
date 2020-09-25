@@ -85,11 +85,11 @@
                 </div>
             </div>
 						<div class="position-relative form-group">
-							<label for="verifyDatePatient">Ngày tiếp nhận</label>
-							<input name="verifyDatePatient" id="verifyDatePatient" formControlName="verifyDatePatient" type="date" class="form-control"
-							       [ngClass]="{ 'is-invalid': submitted && f.verifyDatePatient.errors }">
-							<div *ngIf="submitted && f.verifyDatePatient.errors" class="invalid-feedback">
-								<div *ngIf="f.verifyDatePatient.errors.required">Nhập ngày mắc bệnh</div>
+							<label>Ngày tiếp nhận</label>
+							<input formControlName="verifyDate" type="date" class="form-control"
+							       [ngClass]="{ 'is-invalid': submitted && f.verifyDate.errors }">
+							<div *ngIf="submitted && f.verifyDate.errors" class="invalid-feedback">
+								<div *ngIf="f.verifyDate.errors.required">Nhập ngày mắc bệnh</div>
 							</div>
 						</div>
 						<div class="position-relative form-group">
@@ -157,16 +157,16 @@
 						</div>
 					</div>
 					<div class="position-relative form-group">
-						<label for="verifyDatePatient">Ngày mắc bệnh</label>
-						<input name="verifyDatePatient" formControlName="verifyDatePatient" type="date" class="form-control"
-						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.verifyDatePatient?.errors }">
-						<div *ngIf="submitted && checkUpdateForm?.verifyDatePatient?.errors" class="invalid-feedback">
-							<div *ngIf="checkUpdateForm?.verifyDatePatient?.errors?.required">Nhập ngày mắc bệnh</div>
+						<label>Ngày mắc bệnh</label>
+						<input name="verifyDate" formControlName="verifyDate" type="date" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.verifyDate?.errors }">
+						<div *ngIf="submitted && checkUpdateForm?.verifyDate?.errors" class="invalid-feedback">
+							<div *ngIf="checkUpdateForm?.verifyDate?.errors?.required">Nhập ngày mắc bệnh</div>
 						</div>
 					</div>
 					<div class="position-relative form-group">
-						<label for="verifyDatePatient">Ghi chú</label>
-						<input name="verifyDatePatient" formControlName="notePatient" type="text" class="form-control">
+						<label>Ghi chú</label>
+						<textarea name="verifyDate" formControlName="notePatient" type="text" class="form-control"></textarea>
 					</div>
 					<div class="modal-footer">
 						<button id="btnCloseUpdate" type="button" class="btn btn-secondary" (click)="c('Close click')">Hủy</button>
@@ -197,7 +197,7 @@
 						<td>{{item.age}}</td>
 						<td>{{item.province}}</td>
 						<td>{{item.status}}</td>
-						<td class="text-left">{{item.verifyDatePatient}}</td>
+						<td class="text-left">{{item.verifyDate}}</td>
 						<td class="text-note">{{item.notePatient}}</td>
 						<td><i class="vsm-icon pe-7s-config mr-2 ico-edit" (click)="openUpdatePatient(patient, item.id)"></i></td>
 					</tr>

@@ -6,38 +6,38 @@
     </button>
   </div>
   <div class="modal-body">
-    <form name="form" [formGroup]="editUserForm"  (ngSubmit)="onSubmit()">
+    <form name="form" [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
       <div class="position-relative form-group">
         <label for="userName">Họ và Tên</label>
         <input name="userName" id="userName" formControlName="userName" type="text" class="form-control">
-<!--        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">-->
-<!--          <div *ngIf="f.name.errors.required">Nhập tên bệnh nhân</div>-->
-<!--          <div *ngIf="f.name.errors.pattern">Nhập sai định dạng</div>-->
-<!--        </div>-->
+        <div *ngIf="submitted && f?.userName?.errors" class="invalid-feedback">
+          <div *ngIf="f.userName?.errors.required">Nhập tên bệnh nhân</div>
+          <div *ngIf="f.userName?.errors.pattern">Nhập sai định dạng</div>
+        </div>
       </div>
       <div class="position-relative form-group">
         <label for="phone">Số điện thoại</label>
-        <input name="phone" id="phone" formControlName="phone" type="text" class="form-control">
-<!--               [ngClass]="{ 'is-invalid': submitted && f.address.errors }">-->
-<!--        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">-->
-<!--          <div *ngIf="f.address.errors.required">Nhập địa điểm</div>-->
-<!--        </div>-->
+        <input name="phone" id="phone" formControlName="phone" type="text" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f?.phone?.errors }">
+        <div *ngIf="submitted && f?.phone?.errors" class="invalid-feedback">
+          <div *ngIf="f?.phone?.errors.required">Nhập số điện thoại</div>
+        </div>
       </div>
       <div class="position-relative form-group">
         <label for="address">Địa chỉ</label>
-        <input name="address" id="address" formControlName="address" type="text" class="form-control">
-<!--               [ngClass]="{ 'is-invalid': submitted && f.lat.errors }">-->
-<!--        <div *ngIf="submitted && f.lat.errors" class="invalid-feedback">-->
-<!--          <div *ngIf="f.lat.errors.required">Nhập vĩ độ</div>-->
-<!--        </div>-->
+        <input name="address" id="address" formControlName="address" type="text" class="form-control"
+               [ngClass]="{ 'is-invalid': submitted && f.lat.errors }">
+        <div *ngIf="submitted && f.lat.errors" class="invalid-feedback">
+          <div *ngIf="f.lat.errors.required">Nhập vĩ độ</div>
+        </div>
       </div>
       <div class="position-relative form-group">
         <label for="email">Email</label>
-        <input name="email" id="email" formControlName="email" type="text" class="form-control" >
-<!--               [ngClass]="{ 'is-invalid': submitted && f.lng.errors }">-->
-<!--        <div *ngIf="submitted && f.lng.errors" class="invalid-feedback">-->
-<!--          <div *ngIf="f.lng.errors.required">Nhập kinh độ</div>-->
-<!--        </div>-->
+        <input name="email" id="email" formControlName="email" type="text" class="form-control" readonly
+               [ngClass]="{ 'is-invalid': submitted && f.lng.errors }">
+        <div *ngIf="submitted && f.lng.errors" class="invalid-feedback">
+          <div *ngIf="f.lng.errors.required">Nhập kinh độ</div>
+        </div>
       </div>
     </form>
       <div class="modal-footer">

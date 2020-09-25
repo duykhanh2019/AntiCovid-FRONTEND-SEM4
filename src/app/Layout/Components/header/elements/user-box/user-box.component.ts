@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ThemeOptions} from '../../../../../theme-options';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../../../../_model/user';
@@ -16,6 +16,7 @@ export class UserBoxComponent implements OnInit {
   closeResult: string;
   loading = false;
   users: User;
+  submitted = false;
   item = JSON.parse(localStorage.getItem('currentUser'));
   id = this.item.id;
 
@@ -44,7 +45,6 @@ export class UserBoxComponent implements OnInit {
     //     });
   }
   openUserDetail(content) {
-    console.log(content);
     this.modalService.open(content).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
@@ -60,14 +60,26 @@ export class UserBoxComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  get f() { return this.editUserForm.controls; }
+
   onSubmit() {
+    this.submitted = true;
+    if (this.editUserForm.invalid) {
+      return;
+    }
     const objUser = {
-      userName: this.editUserForm.controls.userName.value,
-      phone: this.editUserForm.controls.phone.value,
-      address: this.editUserForm.controls.address.value,
-      email: this.editUserForm.controls.email.value,
-      status: this.item.status,
-      password: this.item.password
+      userName: this.f.userName.value,
+      phone: this.f.phone.value,
+      address: this.f.address.value,
+      email: this.f.lng.value,
+      status: this.f.status.value,
+      password: this.f.password.value,
+      // userName: this.editUserForm.controls.userName.value,
+      // phone: this.editUserForm.controls.phone.value,
+      // address: this.editUserForm.controls.address.value,
+      // email: this.editUserForm.controls.email.value,
+      // status: this.item.status,
+      // password: this.item.password
     };
     // debugger;
     this.userBoxService.updateUser(this.id, objUser)
