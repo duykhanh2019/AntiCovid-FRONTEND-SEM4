@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {LocationModel} from '../Model/location.model';
 import {LocationService} from './location.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {PatientLocationModel} from '../Model/patient-location.model';
 import {PatientModel} from '../Model/patient.model';
@@ -14,6 +14,7 @@ import {PatientModel} from '../Model/patient.model';
 export class LocationComponent implements OnInit {
   registerForm: FormGroup;
   addPatientLocationForm: FormGroup;
+  updateForm: FormGroup;
   submitted = false;
   closeResult: string;
   locationId: number;
@@ -24,6 +25,7 @@ export class LocationComponent implements OnInit {
   currentHospital: any;
   p = 1;
   datas: LocationModel[] = [];
+  dataLocation: LocationModel;
   patientLocations: PatientModel[] = [];
   currentPatientLocations: PatientModel[] = [];
   index: number;
@@ -39,12 +41,19 @@ export class LocationComponent implements OnInit {
 
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
+      province: ['', Validators.required],
       lat: ['', Validators.required],
       lng: ['', [Validators.required]],
     });
     this.addPatientLocationForm = this.formBuilder.group({
       patientName: ['', Validators.required],
       verifyDate: ['', Validators.required],
+    });
+    this.updateForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      province: new FormControl('', Validators.required),
+      lat: new FormControl('', Validators.required),
+      lng: new FormControl('', Validators.required),
     });
   }
   open(content) {
@@ -66,18 +75,44 @@ export class LocationComponent implements OnInit {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
+  openUpdateLocation(location, id: number) {
+    this.submitted = false;
+    this.getLocation(id);
+    this.modalService.open(location).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  getLocation(id: number) {
+    this.locationService.getLocation(id).subscribe(
+        (res: any) => {
+          this.dataLocation = res;
+          console.log(this.dataLocation);
+          this.updateForm.setValue({
+            province: this.dataLocation.province,
+            name: this.dataLocation.name,
+            lat: this.dataLocation.lat,
+            lng: this.dataLocation.lng,
+          });
+        }
+    );
+  }
   get f() { return this.registerForm.controls; }
   get v() { return this.addPatientLocationForm.controls; }
+  get checkUpdateForm() { return this.updateForm.controls; }
   onSubmit() {
     this.submitted = true;
 
     if (this.registerForm.invalid) {
       return;
     }
+    const province = this.f.province.value;
     const name = this.f.name.value;
     const lat = this.f.lat.value;
     const lng = this.f.lng.value;
-    this.locationService.addLocation({name, lat, lng}).subscribe(
+    this.locationService.addLocation({province, name, lat, lng}).subscribe(
         res => {
           this.modalReference.close();
           alert('Thêm địa điểm thành công.');
@@ -88,6 +123,26 @@ export class LocationComponent implements OnInit {
           console.log(error.message);
         }
     );
+  }
+  onSubmitUpdate(id) {
+    this.submitted = true;
+    const request = {
+      id,
+      province: this.updateForm.controls.province.value ? this.updateForm.controls.province.value : this.dataLocation.province,
+      name: this.updateForm.controls.name.value ? this.updateForm.controls.name.value : this.dataLocation.name,
+      lat: this.updateForm.controls.lat.value ? this.updateForm.controls.lat.value : this.dataLocation.lat,
+      lng: this.updateForm.controls.lng.value ? this.updateForm.controls.lng.value : this.dataLocation.lng,
+      // tslint:disable-next-line:max-line-length
+      // verifyDatePatient: this.updateForm.controls.verifyDatePatient.value ? this.updateForm.controls.verifyDatePatient.value : this.dataLocation.verifyDatePatient,
+    };
+    this.locationService.update(request).subscribe(rs => {
+      setTimeout(() => {
+        alert('Thay đổi thành công');
+      }, 800);
+      this.getAll();
+      const btn: HTMLElement = document.getElementById('btnCloseUpdate');
+      btn.click();
+    });
   }
   onSubmitPatient() {
     this.submitted = true;

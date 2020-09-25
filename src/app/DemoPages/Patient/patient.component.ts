@@ -3,6 +3,7 @@ import {PatientModel} from '../Model/patient.model';
 import {PatientService} from './patient.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -26,11 +27,12 @@ export class PatientComponent implements OnInit {
   public isActive: any;
   values = '';
   existId = false;
+  public showOverlay = true;
 
   @Output() closeModalEvent = new EventEmitter<boolean>();
   @ViewChild('formDirective') private formDirective: NgForm;
   // tslint:disable-next-line:max-line-length
-  constructor(private patientService: PatientService, private modalService: NgbModal, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private patientService: PatientService, private modalService: NgbModal, private formBuilder: FormBuilder) { }
   ngOnInit(): void {
     this.getAll();
 
