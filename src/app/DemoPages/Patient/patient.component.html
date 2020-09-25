@@ -42,7 +42,7 @@
 			<div class="modal-body">
 				<form name="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 					<div class="position-relative form-group">
-						<label for="patientName">Họ và tên</label>
+						<label for="patientName">Mã bệnh nhân</label>
 						<input name="patientName" id="patientName" formControlName="patientName" type="text" class="form-control"
 							   [ngClass]="{ 'is-invalid': submitted && f.patientName.errors}" placeholder="BN-00" [class.redBoder]="existId" (input)="existId = false" >
 						<div *ngIf="submitted && f.patientName.errors" class="invalid-feedback">

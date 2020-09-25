@@ -92,16 +92,19 @@
           </div>
           <div class="row mb-2">
             <div class="col-3">
-              <label for="">Tên bệnh nhân</label><br>
+              <label for="">Mã bệnh nhân</label><br>
             </div>
             <div class="col-7">
-              <select name="patientName" id="patientName" formControlName="patientName" type="text" class="form-control"
+              <select name="patientName" id="patientName" formControlName="patientName" type="text" class="form-control" [class.select]="existId"
                       [ngClass]="{ 'is-invalid': submitted && v.patientName.errors }">
                 <option selected="selected">Chọn bệnh nhân</option>
-                <option *ngFor="let item of currentPatientLocations" value="{{item.id}}">{{item.patientName}} {{item.added}}</option>
+                <option *ngFor="let item of currentPatientLocations" value="{{item.id}}" (input)="existId = false">{{item.patientName}} {{item.added}}</option>
               </select>
               <div *ngIf="submitted && v.patientName.errors" class="invalid-feedback">
-                <div>Nhập tên bệnh nhân</div>
+                <div>Nhập mã bệnh nhân</div>
+              </div>
+              <div *ngIf="existId" style="color: #C71C22; font-size: 12px;">
+                <div>Bệnh nhân đã được thêm</div>
               </div>
             </div>
           </div>
