@@ -33,6 +33,7 @@
     "chartjs-plugin-datalabels": "^0.6.0",
     "font-awesome": "^4.7.0",
     "lodash-es": "^4.17.11",
+    "moment": "^2.29.0",
     "ng-bootstrap": "^1.6.3",
     "ng2-charts": "^2.2.2",
     "ngx-pagination": "^5.0.0",
