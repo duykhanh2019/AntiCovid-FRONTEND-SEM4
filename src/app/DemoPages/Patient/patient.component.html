@@ -20,6 +20,8 @@
 		background-image: none;
 	}
 </style>
+
+
 <div class="search-wrapper" [class.active]="isActive">
 	<div class="input-holder">
 		<input type="text" placeholder="Tìm tên bệnh nhân" class="search-input" [(ngModel)]="patientName" (input)="Search()">
@@ -175,9 +177,10 @@
 				</form>
 			</div>
 		</ng-template>
-		<div class="main-card mb-3 card" >
-			<div class="card-body">
+		<div class="main-card mb-3 card">
+			<div class="card-body table-h588">
 				<table class="mb-0 table table-striped">
+					<app-loading *ngIf="loadingTable">{{ loadingTable }}</app-loading>
 					<thead>
 					<tr class="text-center">
 						<th class="title">Bệnh nhân</th>
@@ -198,7 +201,7 @@
 						<td>{{item.province}}</td>
 						<td>{{item.status}}</td>
 						<td class="text-left">{{item.verifyDatePatient}}</td>
-						<td class="text-note">{{item.notePatient}}</td>
+						<td class="text-note cut-hide-text-2">{{item.notePatient}}</td>
 						<td><i class="vsm-icon pe-7s-config mr-2 ico-edit" (click)="openUpdatePatient(patient, item.id)"></i></td>
 					</tr>
 					</tbody>

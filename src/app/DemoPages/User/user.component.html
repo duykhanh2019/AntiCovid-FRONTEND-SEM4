@@ -1,4 +1,5 @@
 <!--List User-->
+<app-loading *ngIf="loadingTable">{{ loadingTable }}</app-loading>
 
 <div class="search-wrapper mb-3" [class.active]="isActive">
 	<div class="input-holder">

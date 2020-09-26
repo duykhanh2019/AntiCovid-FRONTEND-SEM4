@@ -36,18 +36,7 @@ export class LoginBoxedService {
             localStorage.setItem('currentUser', JSON.stringify(user));
           }));
   }
-  // login(email: string, password: string) {
-  //   let params = new HttpParams();
-  //   params = params.set('email', email);
-  //   params = params.set('password', password);
-  //   return this.httpClient.post<any>(`http://52.165.229.168:8080/api/loginweb`, params, { headers: this.headers})
-  //       .pipe(map(user => {
-  //         // store user details and jwt token in local storage to keep user logged in between page refreshes
-  //         localStorage.setItem('currentUser', JSON.stringify(user));
-  //         this.currentUserSubject.next(user);
-  //         return user;
-  //       }));
-  // }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
