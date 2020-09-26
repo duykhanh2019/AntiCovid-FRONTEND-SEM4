@@ -92,6 +92,7 @@ import {LayoutComponent} from './DemoPages/Forms/Elements/layout/layout.componen
 // Charts
 
 import {LocationComponent} from './DemoPages/Location/location.component';
+import { LoadingComponent } from './DemoPages/loading/loading.component';
 
 // Chart.js Examples
 
@@ -106,8 +107,8 @@ import {DoughnutChartComponent} from './DemoPages/Charts/chartjs/examples/doughn
 import {PieChartComponent} from './DemoPages/Charts/chartjs/examples/pie-chart/pie-chart.component';
 import { UpdatePatientComponent } from './DemoPages/Patient/update-patient/update-patient.component';
 import { AddPatientComponent } from './DemoPages/Location/AddPatient/add-patient.component';
-import {JwtInterceptor} from "./_helpers/jwt.interceptor";
-import {ErrorInterceptor} from "./_helpers/error.interceptor";
+import {JwtInterceptor} from './_helpers/jwt.interceptor';
+import {ErrorInterceptor} from './_helpers/error.interceptor';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -133,7 +134,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     SidebarComponent,
     LogoComponent,
-
+    LoadingComponent,
     // FOOTER
 
     FooterComponent,
@@ -200,6 +201,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ScatterChartComponent,
     UpdatePatientComponent,
     AddPatientComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
