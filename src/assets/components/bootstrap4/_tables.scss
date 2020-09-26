@@ -21,10 +21,42 @@
 
   tbody + tbody {
     border-top: (2 * $table-border-width) solid $table-border-color;
+
   }
 
   .table {
     background-color: $body-bg;
+  }
+  .table-h588{
+    height: 588px;
+  }
+  .cut-hide-text-2 {
+    word-wrap: break-word;
+    display: -webkit-box;
+    line-height: 26px;
+    -webkit-line-clamp: 1;
+    height: 42px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+    max-width: 260px;
+  }
+  tbody{
+    tr:hover{
+
+      background: #9da39d linear-gradient(180deg, #a9b3a4, #a8a89d) repeat-x;
+      color: #fff;
+      transition:all .4s ease-in-out;
+      -webkit-transition:all .4s ease-in-out;
+      -moz-transition:all .4s ease-in-out;
+      -o-transition:all .4s ease-in-out;
+      .cut-hide-text-2{
+        height: initial;
+      }
+      .ico-edit{
+        color: #fff;
+      }
+    }
   }
 }
 

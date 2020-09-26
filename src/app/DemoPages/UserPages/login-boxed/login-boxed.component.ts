@@ -14,6 +14,7 @@ export class LoginBoxedComponent implements OnInit {
 
   loginForm: FormGroup;
   loading = false;
+  isLoading = false;
   submitted = false;
   returnUrl: string;
   error = '';
@@ -52,16 +53,23 @@ export class LoginBoxedComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-
     this.loading = true;
+    this.isLoading = true;
     this.loginService.login(this.f.email.value, this.f.password.value)
         .subscribe(
             data => {
-              this.router.navigateByUrl('/');
+              this.wait(1000).then( () =>  {
+                this.router.navigateByUrl('/');
+                this.isLoading = false;
+              });
             },
             error => {
               alert('Email hoặc mật khẩu không đúng');
-              this.loading = false;
+              this.isLoading = false;
             });
+  }
+
+  async wait(ms: number): Promise<void> {
+    return new Promise<void>( resolve => setTimeout( resolve, ms) );
   }
 }

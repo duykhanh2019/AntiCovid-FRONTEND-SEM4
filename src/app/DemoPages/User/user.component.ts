@@ -15,15 +15,20 @@ export class StandardComponent implements OnInit {
   datas: User[] = [];
   email: string;
   index: number;
+  loadingTable = false;
   public isActive: any;
   constructor(private standardService: UserService) { }
   ngOnInit(): void {
     this.getAll();
   }
   getAll() {
+    this.loadingTable = true;
     this.standardService.getAll().subscribe(
         (res: any) => {
-          this.datas = res;
+          this.wait(500).then( () =>  {
+            this.datas = res;
+            this.loadingTable = false;
+          });
         },
         error =>
             console.log(3453)
@@ -68,5 +73,8 @@ export class StandardComponent implements OnInit {
     str = str.replace(/\u02C6|\u0306|\u031B/g, ''); // mũ â (ê), mũ ă, mũ ơ (ư)
 
     return str;
+  }
+  async wait(ms: number): Promise<void> {
+    return new Promise<void>( resolve => setTimeout( resolve, ms) );
   }
 }

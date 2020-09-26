@@ -17,6 +17,7 @@ export class PatientComponent implements OnInit {
   updateForm: FormGroup;
   submitted = false;
   closeResult: string;
+  loadingTable = false;
   p = 1;
   datas: PatientModel[] = [];
   dataPatient: PatientModel;
@@ -156,9 +157,13 @@ export class PatientComponent implements OnInit {
     }
   }
   getAll() {
+    this.loadingTable = true;
     this.patientService.getAll().subscribe(
       (res: any) => {
-        this.datas = res;
+        this.wait(2000).then( () =>  {
+          this.datas = res;
+          this.loadingTable = false;
+        });
       }
     );
   }
@@ -166,14 +171,14 @@ export class PatientComponent implements OnInit {
     this.patientService.getPatient(id).subscribe(
       (res: any) => {
         this.dataPatient = res;
-        console.log(this.dataPatient.verifyDatePatient);
+        // console.log(this.dataPatient.verifyDatePatient);
         this.updateForm.setValue({
           patientName: this.dataPatient.patientName,
           age: this.dataPatient.age,
           gender: this.dataPatient.gender,
           province: this.dataPatient.province,
           status: this.dataPatient.status,
-          verifyDatePatient: this.dataPatient.verifyDatePatient.slice(0, 10),
+          verifyDatePatient: this.dataPatient.verifyDatePatient,
           notePatient: this.dataPatient.notePatient
         });
       }
@@ -197,5 +202,7 @@ export class PatientComponent implements OnInit {
       form.get(key).setErrors(null) ;
     });
   }
-
+  async wait(ms: number): Promise<void> {
+    return new Promise<void>( resolve => setTimeout( resolve, ms) );
+  }
 }
