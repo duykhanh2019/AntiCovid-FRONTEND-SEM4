@@ -149,19 +149,19 @@
 						</div>
 					</div>
 					<div class="position-relative form-group">
-						<label for="status">Trình trạng</label>
-						<input name="status" id="updatePatientGroup" formControlName="status" type="text" class="form-control"
-						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.updatePatientGroup?.errors }">
+						<label>Trình trạng</label>
+						<input formControlName="status" type="text" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.status?.errors}">
 						<div *ngIf="submitted && checkUpdateForm?.status?.errors" class="invalid-feedback">
 							<div *ngIf="checkUpdateForm?.status?.errors?.required">Nhập tình trạng bệnh nhân</div>
 						</div>
 					</div>
 					<div class="position-relative form-group">
 						<label>Ngày mắc bệnh</label>
-						<input name="verifyDate" formControlName="verifyDate" type="date" class="form-control"
-						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.verifyDate?.errors }">
-						<div *ngIf="submitted && checkUpdateForm?.verifyDate?.errors" class="invalid-feedback">
-							<div *ngIf="checkUpdateForm?.verifyDate?.errors?.required">Nhập ngày mắc bệnh</div>
+						<input name="verifyDatePatient" formControlName="verifyDatePatient" type="date" class="form-control"
+						       [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.verifyDatePatient?.errors}">
+						<div *ngIf="submitted && checkUpdateForm?.verifyDatePatient?.errors" class="invalid-feedback">
+							<div *ngIf="checkUpdateForm?.verifyDatePatient?.errors?.required">Nhập ngày mắc bệnh</div>
 						</div>
 					</div>
 					<div class="position-relative form-group">

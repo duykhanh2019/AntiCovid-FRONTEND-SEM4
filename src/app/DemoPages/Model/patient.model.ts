@@ -2,7 +2,7 @@ export class PatientModel {
     id: number;
     patientName: string;
     notePatient: string;
-    verifyDate: any;
+    verifyDatePatient: any;
     status: string;
     province: string;
     age: number;

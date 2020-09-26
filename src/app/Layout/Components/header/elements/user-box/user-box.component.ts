@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ThemeOptions} from '../../../../../theme-options';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../../../../_model/user';
@@ -16,7 +16,6 @@ export class UserBoxComponent implements OnInit {
   closeResult: string;
   loading = false;
   users: User;
-  submitted = false;
   item = JSON.parse(localStorage.getItem('currentUser'));
   id = this.item.id;
 
@@ -45,11 +44,12 @@ export class UserBoxComponent implements OnInit {
     //     });
   }
   openUserDetail(content) {
+    console.log(content);
     this.modalService.open(content).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -60,45 +60,33 @@ export class UserBoxComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  get f() { return this.editUserForm.controls; }
-
   onSubmit() {
-    this.submitted = true;
-    if (this.editUserForm.invalid) {
-      return;
-    }
     const objUser = {
-      userName: this.f.userName.value,
-      phone: this.f.phone.value,
-      address: this.f.address.value,
-      email: this.f.lng.value,
-      status: this.f.status.value,
-      password: this.f.password.value,
-      // userName: this.editUserForm.controls.userName.value,
-      // phone: this.editUserForm.controls.phone.value,
-      // address: this.editUserForm.controls.address.value,
-      // email: this.editUserForm.controls.email.value,
-      // status: this.item.status,
-      // password: this.item.password
+      userName: this.editUserForm.controls.userName.value,
+      phone: this.editUserForm.controls.phone.value,
+      address: this.editUserForm.controls.address.value,
+      email: this.editUserForm.controls.email.value,
+      status: this.item.status,
+      password: this.item.password
     };
     // debugger;
     this.userBoxService.updateUser(this.id, objUser)
-        .pipe(first())
-        .subscribe(
-            res => {
-              alert('cập nhật thành công.');
-              localStorage.removeItem('currentUser');
-              window.location.reload();
-            },
-            error => {
-              alert('thất bại!');
-              console.log(error.message);
-            },
-        );
+      .pipe(first())
+      .subscribe(
+        res => {
+          alert('Cập nhật thành công.');
+          localStorage.removeItem('currentUser');
+          window.location.reload();
+        },
+        error => {
+          alert('thất bại!');
+          console.log(error.message);
+        },
+      );
   }
 
-    logout() {
-      localStorage.removeItem('currentUser');
-      window.location.reload();
-    }
+  logout() {
+    localStorage.removeItem('currentUser');
+    window.location.reload();
+  }
 }
