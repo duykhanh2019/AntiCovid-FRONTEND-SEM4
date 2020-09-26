@@ -29,6 +29,7 @@
   <button class="close" (click)="isActive = false"></button>
 </div>
 
+<!--Modal add location-->
 <div class="row">
   <div class="col-lg-12">
     <ng-template #content let-c="close" let-d="dismiss">
@@ -43,7 +44,7 @@
           <div class="position-relative form-group">
             <label for="province">Tỉnh/Tp</label>
             <input name="province" id="province" formControlName="province" type="text" class="form-control"
-                   [ngClass]="{ 'is-invalid': submitted && f.province.errors}">
+                   [ngClass]="{ 'is-invalid': submitted && f.province.errors}" (input)="existId = false">
             <div *ngIf="submitted && f.province.errors" class="invalid-feedback">
               <div *ngIf="f.province.errors.required">Nhập tỉnh/tp</div>
             </div>
@@ -144,7 +145,7 @@
       </div>
     </ng-template>
 
-<!--    form update location-->
+<!--    Modal update location-->
     <ng-template #location let-c="close" let-d="dismiss">
       <div class="modal-header">
         <h4 class="modal-title">Sửa thông tin khu vực dịch bệnh</h4>
@@ -157,7 +158,7 @@
           <div class="position-relative form-group">
             <label for="province">Tỉnh/TP</label>
             <input name="province" formControlName="province" type="text" class="form-control"
-                   [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.province?.errors }">
+                   [ngClass]="{ 'is-invalid': submitted && checkUpdateForm?.province?.errors }" (input)="existId = false">
             <div *ngIf="submitted && checkUpdateForm?.province?.errors" class="invalid-feedback">
               <div *ngIf="checkUpdateForm?.province?.errors?.required">Nhập tỉnh/tp</div>
             </div>

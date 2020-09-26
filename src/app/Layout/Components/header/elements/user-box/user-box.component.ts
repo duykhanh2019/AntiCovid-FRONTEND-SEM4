@@ -46,10 +46,10 @@ export class UserBoxComponent implements OnInit {
   openUserDetail(content) {
     console.log(content);
     this.modalService.open(content).result.then((result) => {
-        this.closeResult = `Closed with: ${result}`;
-      }, (reason) => {
-        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      });
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -71,22 +71,22 @@ export class UserBoxComponent implements OnInit {
     };
     // debugger;
     this.userBoxService.updateUser(this.id, objUser)
-        .pipe(first())
-        .subscribe(
-            res => {
-              alert('cập nhật thành công.');
-              localStorage.removeItem('currentUser');
-              window.location.reload();
-            },
-            error => {
-              alert('thất bại!');
-              console.log(error.message);
-            },
-        );
+      .pipe(first())
+      .subscribe(
+        res => {
+          alert('Cập nhật thành công.');
+          localStorage.removeItem('currentUser');
+          window.location.reload();
+        },
+        error => {
+          alert('thất bại!');
+          console.log(error.message);
+        },
+      );
   }
 
-    logout() {
-      localStorage.removeItem('currentUser');
-      window.location.reload();
-    }
+  logout() {
+    localStorage.removeItem('currentUser');
+    window.location.reload();
+  }
 }

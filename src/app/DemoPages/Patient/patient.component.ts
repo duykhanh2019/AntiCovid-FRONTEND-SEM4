@@ -4,6 +4,8 @@ import {PatientService} from './patient.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+// @ts-ignore
+import moment from 'moment';
 
 
 @Component({
@@ -52,7 +54,7 @@ export class PatientComponent implements OnInit {
       age: new FormControl('', Validators.required),
       province: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
-      notePatient: new FormControl('', Validators.required),
+      notePatient: new FormControl('', ),
       verifyDatePatient: new FormControl('', Validators.required),
     });
 
@@ -102,7 +104,7 @@ export class PatientComponent implements OnInit {
       province: this.f.province.value,
       age: this.f.age.value,
       status: this.f.status.value,
-      verifyDatePatient: this.f.verifyDatePatient.value,
+      verifyDatePatient: this.f.verifyDate.value,
       gender: this.f.gender.value
     };
     this.patientService.addPatient(request).subscribe(
@@ -122,6 +124,9 @@ export class PatientComponent implements OnInit {
   }
   onSubmitUpdate(id) {
     this.submitted = true;
+    if (this.updateForm.invalid) {
+      return;
+    }
     const request = {
       id,
       patientName: this.updateForm.controls.patientName.value ? this.updateForm.controls.patientName.value : this.dataPatient.patientName,
@@ -171,18 +176,23 @@ export class PatientComponent implements OnInit {
     this.patientService.getPatient(id).subscribe(
       (res: any) => {
         this.dataPatient = res;
-        // console.log(this.dataPatient.verifyDatePatient);
+        console.log(this.dataPatient.verifyDatePatient);
         this.updateForm.setValue({
           patientName: this.dataPatient.patientName,
           age: this.dataPatient.age,
           gender: this.dataPatient.gender,
           province: this.dataPatient.province,
           status: this.dataPatient.status,
-          verifyDatePatient: this.dataPatient.verifyDatePatient,
+          verifyDatePatient: this.convertTickToDateDPicker(this.dataPatient.verifyDatePatient),
           notePatient: this.dataPatient.notePatient
         });
       }
     );
+  }
+  convertTickToDateDPicker(value) {
+    const date = new Date(value);
+    date.setDate(date.getDate() + 1);
+    return moment(date).format('YYYY-MM-DD');
   }
 
   Delete(id: number) {

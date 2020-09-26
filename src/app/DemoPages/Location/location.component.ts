@@ -58,6 +58,7 @@ export class LocationComponent implements OnInit {
   }
   open(content) {
     this.registerForm.reset();
+    this.submitted = false;
     this.existId = false;
     this.modalReference = this.modalService.open(content);
     this.modalReference.result.then((result) => {
@@ -119,6 +120,7 @@ export class LocationComponent implements OnInit {
           this.getAll();
         },
         error => {
+          this.existId = true;
           alert('Thêm thất bại!');
           console.log(error.message);
         }
@@ -126,6 +128,9 @@ export class LocationComponent implements OnInit {
   }
   onSubmitUpdate(id) {
     this.submitted = true;
+    if (this.updateForm.invalid) {
+      return;
+    }
     const request = {
       id,
       province: this.updateForm.controls.province.value ? this.updateForm.controls.province.value : this.dataLocation.province,
